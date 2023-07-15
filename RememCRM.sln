@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RememCRM", "RememCRM\RememCRM.csproj", "{67C10090-723D-425E-90A0-0DF069DF6BD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67C10090-723D-425E-90A0-0DF069DF6BD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C10090-723D-425E-90A0-0DF069DF6BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C10090-723D-425E-90A0-0DF069DF6BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C10090-723D-425E-90A0-0DF069DF6BD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {70ED5A52-7A23-43E0-8C39-EAAB44BBA629}
+	EndGlobalSection
+EndGlobal
