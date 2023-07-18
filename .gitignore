@@ -6,6 +6,7 @@
 *.env
 *.local
 appsettings.Local.json
+02_Db_Seed_Data.sql
 
 # User-specific files
 *.rsuser
