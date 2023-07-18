@@ -12,11 +12,11 @@ namespace RememCRM.Models
         public string Name { get; set; }
         public DateTime DOD { get; set; }
         public int RelationId { get; set; }
-        public ListOptions Relation { get; set; }
+        public ListOption Relation { get; set; }
         public int ServiceTypeId { get; set; }
-        public ListOptions ServiceType { get; set; }
+        public ListOption ServiceType { get; set; }
         public int BurialTypeId { get; set; }
-        public ListOptions BurialType { get; set; }
+        public ListOption BurialType { get; set; }
 
     }
 }

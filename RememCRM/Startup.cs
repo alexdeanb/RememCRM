@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RememCRM.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,7 @@ namespace RememCRM
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RememCRM", Version = "v1" });
             });
+            services.AddTransient<IListOptionRepository, ListOptionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

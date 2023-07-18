@@ -11,7 +11,7 @@ GO
 CREATE DATABASE [RememCRM]
 GO
 
-USE [RememCRMN]
+USE [RememCRM]
 GO
 
 -----------------------------------------------------------------------------------
@@ -21,21 +21,21 @@ CREATE TABLE [Organization] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
   [Name] varchar(50) NOT NULL,
   [PrimaryColor] varchar(7),
-  [Logo] blob
+  [Logo] image
 )
 GO
 
 CREATE TABLE [UserProfile] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
-  [OragnizationId] int NOT NULL,
-  [UserTypeId] int NOT NULL,
-  [FirebaseUserId] int NOT NULL,
   [Name] varchar(50) NOT NULL,
-  [Email] varchar(25) NOT NULL
+  [Email] varchar(25) NOT NULL,
+  [OrganizationId] int NOT NULL,
+  [UserTypeId] int NOT NULL,
+  [FirebaseUserId] varchar(255) NOT NULL
 )
 GO
 
-CREATE TABLE [ManagerTeams] (
+CREATE TABLE [Teams] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
   [ManagerUserId] int NOT NULL,
   [SalespersonUserId] int NOT NULL
@@ -55,22 +55,34 @@ CREATE TABLE [Widgets] (
 )
 GO
 
+CREATE TABLE [ContactsDeceased] (
+  [Id] int PRIMARY KEY IDENTITY(1, 1),
+  [DeceasedId] int NOT NULL,
+  [ContactId] int NOT NULL
+)
+GO
+
 CREATE TABLE [Contacts] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
-  [UserId] int NOT NULL,
-  [FirstName] varchar(25) NOT NULL,
-  [LastName] varchar(25) NOT NULL,
-  [EmailAddress] varchar(50),
-  [DOB] Date,
+  [AssignedUserId] int NOT NULL,
+  [PrimaryFirstName] varchar(25) NOT NULL,
+  [PrimaryLastName] varchar(25) NOT NULL,
+  [PrimaryEmailAddress] varchar(50),
+  [PrimaryDOB] Date,
+  [SecondaryFirstName] varchar(25),
+  [SecondaryLastName] varchar(25),
+  [SecondaryEmailAddress] varchar(50),
+  [SecondaryDOB] Date,
   [Address] varchar(100),
   [City] varchar(25),
-  [State] varchar(2),
+  [State] varchar(25),
   [Zip] int,
-  [Phone] varchar(12),
-  [PhoneNote] text,
+  [HomePhone] varchar(12),
+  [HomePhoneNote] text,
+  [CellPhone] varchar(12),
+  [CellPhoneNote] text,
   [Notes] text,
-  [ReferralUserId] int,
-  [DeceasedId] int,
+  [ReferralContactId] int,
   [SourceId] int NOT NULL,
   [StatusId] int NOT NULL
 )
@@ -81,18 +93,18 @@ CREATE TABLE [Deceased] (
   [Location] varchar(50),
   [MaritalStatus] varchar(50),
   [ReligiousAffiliation] varchar(50),
-  [ServiceTypeId] int,
-  [BurialTypeId] int,
   [BurialLocation] varchar(50),
   [DeceasedName] varchar(50) NOT NULL,
+  [DOD] Date NOT NULL,
   [RelationID] int NOT NULL,
-  [DOD] Date NOT NULL
+  [ServiceTypeId] int,
+  [BurialTypeId] int
 )
 GO
 
 CREATE TABLE [Contracts] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
-  [LeadId] int,
+  [ContactId] int,
   [UserId] int,
   [ContractTypeId] int,
   [FuneralAmount] int,
@@ -114,7 +126,7 @@ CREATE TABLE [ToDoItems] (
   [ContactId] int,
   [PriotityId] int,
   [Due] Date,
-  [Completed] Boolean
+  [Completed] bit
 )
 GO
 
@@ -134,7 +146,8 @@ GO
 
 CREATE TABLE [Sources] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
-  [Name] varchar(25) NOT NULL
+  [Name] varchar(25) NOT NULL,
+  [Code] varchar(10) NOT NULL
 )
 GO
 
@@ -168,19 +181,19 @@ CREATE TABLE [Status] (
 )
 GO
 
-ALTER TABLE [UserTypes] ADD FOREIGN KEY ([Id]) REFERENCES [UserProfile] ([UserTypeId])
+ALTER TABLE [UserProfile] ADD FOREIGN KEY ([UserTypeId]) REFERENCES [UserTypes] ([Id])
 GO
 
-ALTER TABLE [UserProfile] ADD FOREIGN KEY ([OragnizationId]) REFERENCES [Organization] ([Id])
+ALTER TABLE [UserProfile] ADD FOREIGN KEY ([OrganizationId]) REFERENCES [Organization] ([Id])
 GO
 
 ALTER TABLE [Widgets] ADD FOREIGN KEY ([UserTypeId]) REFERENCES [UserTypes] ([Id])
 GO
 
-ALTER TABLE [Contacts] ADD FOREIGN KEY ([UserId]) REFERENCES [UserProfile] ([Id])
+ALTER TABLE [Contacts] ADD FOREIGN KEY ([AssignedUserId]) REFERENCES [UserProfile] ([Id])
 GO
 
-ALTER TABLE [Contracts] ADD FOREIGN KEY ([LeadId]) REFERENCES [Contacts] ([Id])
+ALTER TABLE [Contracts] ADD FOREIGN KEY ([ContactId]) REFERENCES [Contacts] ([Id])
 GO
 
 ALTER TABLE [ToDoItems] ADD FOREIGN KEY ([UserId]) REFERENCES [UserProfile] ([Id])
@@ -192,19 +205,19 @@ GO
 ALTER TABLE [EmailTemplates] ADD FOREIGN KEY ([OrganizationId]) REFERENCES [Organization] ([Id])
 GO
 
-ALTER TABLE [Contacts] ADD FOREIGN KEY ([ReferralUserId]) REFERENCES [Contacts] ([Id])
+ALTER TABLE [Contacts] ADD FOREIGN KEY ([ReferralContactId]) REFERENCES [Contacts] ([Id])
 GO
 
-ALTER TABLE [Sources] ADD FOREIGN KEY ([Id]) REFERENCES [Contacts] ([SourceId])
+ALTER TABLE [Contacts] ADD FOREIGN KEY ([SourceId]) REFERENCES [Sources] ([Id])
 GO
 
-ALTER TABLE [Relationships] ADD FOREIGN KEY ([Id]) REFERENCES [Deceased] ([RelationID])
+ALTER TABLE [Deceased] ADD FOREIGN KEY ([RelationID]) REFERENCES [Relationships] ([Id])
 GO
 
-ALTER TABLE [BurialTypes] ADD FOREIGN KEY ([Id]) REFERENCES [Deceased] ([BurialTypeId])
+ALTER TABLE [Deceased] ADD FOREIGN KEY ([BurialTypeId]) REFERENCES [BurialTypes] ([Id])
 GO
 
-ALTER TABLE [ServiceTypes] ADD FOREIGN KEY ([Id]) REFERENCES [Deceased] ([ServiceTypeId])
+ALTER TABLE [Deceased] ADD FOREIGN KEY ([ServiceTypeId]) REFERENCES [ServiceTypes] ([Id])
 GO
 
 ALTER TABLE [Contracts] ADD FOREIGN KEY ([UserId]) REFERENCES [UserProfile] ([Id])
@@ -216,17 +229,20 @@ GO
 ALTER TABLE [ToDoItems] ADD FOREIGN KEY ([PriotityId]) REFERENCES [Priority] ([Id])
 GO
 
-ALTER TABLE [Status] ADD FOREIGN KEY ([Id]) REFERENCES [Contacts] ([StatusId])
-GO
-
-ALTER TABLE [Deceased] ADD FOREIGN KEY ([Id]) REFERENCES [Contacts] ([DeceasedId])
+ALTER TABLE [Contacts] ADD FOREIGN KEY ([StatusId]) REFERENCES [Status] ([Id])
 GO
 
 ALTER TABLE [Contracts] ADD FOREIGN KEY ([ContractTypeId]) REFERENCES [ContractTypes] ([Id])
 GO
 
-ALTER TABLE [ManagerTeams] ADD FOREIGN KEY ([ManagerUserId]) REFERENCES [UserProfile] ([Id])
+ALTER TABLE [Teams] ADD FOREIGN KEY ([ManagerUserId]) REFERENCES [UserProfile] ([Id])
 GO
 
-ALTER TABLE [ManagerTeams] ADD FOREIGN KEY ([SalespersonUserId]) REFERENCES [UserProfile] ([Id])
+ALTER TABLE [Teams] ADD FOREIGN KEY ([SalespersonUserId]) REFERENCES [UserProfile] ([Id])
+GO
+
+ALTER TABLE [ContactsDeceased] ADD FOREIGN KEY ([DeceasedId]) REFERENCES [Deceased] ([Id])
+GO
+
+ALTER TABLE [ContactsDeceased] ADD FOREIGN KEY ([ContactId]) REFERENCES [Contacts] ([Id])
 GO

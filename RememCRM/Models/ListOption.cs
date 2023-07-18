@@ -1,6 +1,6 @@
 ﻿namespace RememCRM.Models
 {
-    public class ListOptions
+    public class ListOption
     {
         public int Id { get; set; }
         public string Name { get; set; }

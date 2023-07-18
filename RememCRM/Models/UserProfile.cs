@@ -8,7 +8,7 @@
         public int OrganizationId { get; set; }
         public Organization Organization { get; set; }
         public int UserTypeId { get; set; }
-        public ListOptions UserType { get; set; }
+        public ListOption UserType { get; set; }
         public string FirebaseUserId { get; set; }
 
     }

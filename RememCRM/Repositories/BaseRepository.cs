@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace Streamish.Repositories
+namespace RememCRM.Repositories
 {
     public abstract class BaseRepository
     {
@@ -17,6 +17,7 @@ namespace Streamish.Repositories
             get
             {
                 return new SqlConnection(_connectionString);
+
             }
         }
     }
