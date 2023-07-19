@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TextInput } from "flowbite-react";
 
 export const ContactAdd = () => {
   const [newContact, setNewContact] = useState({
@@ -40,14 +41,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-2">
             <div className="w-full">
-              <label htmlFor="first_name" className="">
+              <label htmlFor="first_name" className="dark:text-gray-400">
                 First name
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="first_name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 required
                 onChange={(event) => {
                   const copy = { ...newContact };
@@ -59,14 +58,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-2">
             <div className="w-full">
-              <label htmlFor="last_name" className="">
+              <label htmlFor="last_name" className="dark:text-gray-400">
                 Last name
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="last_name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 required
                 onChange={(event) => {
                   const copy = { ...newContact };
@@ -78,14 +75,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-2">
             <div className="w-full">
-              <label htmlFor="email_address" className="">
+              <label htmlFor="email_address" className="dark:text-gray-400">
                 Email Address
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="email_address"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.PrimaryEmail = event.target.value;
@@ -96,14 +91,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-1">
             <div className="w-full">
-              <label htmlFor="last_name" className="">
+              <label htmlFor="last_name" className="dark:text-gray-400">
                 DOB
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="date"
-                id="last_name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.PrimaryDOB = event.target.value;
@@ -119,14 +112,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-2">
             <div className="w-full">
-              <label htmlFor="first_name" className="">
+              <label htmlFor="first_name" className="dark:text-gray-400">
                 First name
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="first_name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.SecondaryFirstName = event.target.value;
@@ -137,14 +128,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-2">
             <div className="w-full">
-              <label htmlFor="last_name" className="">
+              <label htmlFor="last_name" className="dark:text-gray-400">
                 Last name
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="last_name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.SecondaryLastName = event.target.value;
@@ -155,14 +144,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-2">
             <div className="w-full">
-              <label htmlFor="email_address" className="">
+              <label htmlFor="email_address" className="dark:text-gray-400">
                 Email Address
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="email_address"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.SecondaryEmail = event.target.value;
@@ -173,14 +160,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-1">
             <div className="w-full">
-              <label htmlFor="last_name" className="">
+              <label htmlFor="last_name" className="dark:text-gray-400">
                 DOB
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="date"
-                id="last_name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.SecondaryDOB = event.target.value;
@@ -192,14 +177,12 @@ export const ContactAdd = () => {
           <hr className="col-span-8" />
           <div className="flex col-span-3">
             <div className="w-full">
-              <label htmlFor="first_name" className="">
+              <label htmlFor="first_name" className="dark:text-gray-400">
                 Address
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="first_name"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.Address = event.target.value;
@@ -211,14 +194,12 @@ export const ContactAdd = () => {
           <div className="flex col-span-5"></div>
           <div className="flex col-span-1">
             <div className="w-full">
-              <label htmlFor="city" className="">
+              <label htmlFor="city" className="dark:text-gray-400">
                 City
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="city"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.City = event.target.value;
@@ -229,14 +210,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-1">
             <div className="w-full">
-              <label htmlFor="state" className="">
+              <label htmlFor="state" className="dark:text-gray-400">
                 State
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="state"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.State = event.target.value;
@@ -247,14 +226,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-1">
             <div className="w-full">
-              <label htmlFor="zip" className="">
+              <label htmlFor="zip" className="dark:text-gray-400">
                 Zip
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="zip"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.Zip = event.target.value;
@@ -266,12 +243,12 @@ export const ContactAdd = () => {
           <div className="flex col-span-2"></div>
           <div className="flex col-span-3">
             <div className="w-full">
-              <label htmlFor="reference" className="">
+              <label htmlFor="reference" className="dark:text-gray-400">
                 Referred By
               </label>
               <select
                 id="reference"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
@@ -283,14 +260,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-2">
             <div className="w-full">
-              <label htmlFor="CellPhone" className="">
+              <label htmlFor="CellPhone" className="dark:text-gray-400">
                 Cell Phone
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="CellPhone"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.CellPhone = event.target.value;
@@ -301,14 +276,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-2">
             <div className="w-full">
-              <label htmlFor="CellPhoneNote" className="">
+              <label htmlFor="CellPhoneNote" className="dark:text-gray-400">
                 Notes
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="CellPhoneNote"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.CellPhoneNotes = event.target.value;
@@ -319,13 +292,13 @@ export const ContactAdd = () => {
           </div>
           <div className="col-span-1"></div>
           <div className="col-span-3 row-span-2">
-            <label htmlFor="SpecialNotes" className="">
+            <label htmlFor="SpecialNotes" className="dark:text-gray-400">
               Special Notes
             </label>
             <textarea
               id="SpecialNotes"
               rows="4"
-              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Write your thoughts here..."
               onChange={(event) => {
                 const copy = { ...newContact };
@@ -336,14 +309,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-2">
             <div className="w-full">
-              <label htmlFor="HomePhone" className="">
+              <label htmlFor="HomePhone" className="dark:text-gray-400">
                 Home Phone
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="HomePhone"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.HomePhone = event.target.value;
@@ -354,14 +325,12 @@ export const ContactAdd = () => {
           </div>
           <div className="flex col-span-2">
             <div className="w-full">
-              <label htmlFor="HomePhoneNote" className="">
+              <label htmlFor="HomePhoneNote" className="dark:text-gray-400">
                 Notes
               </label>
-              <input
+              <TextInput
+                sizing="md"
                 type="text"
-                id="HomePhoneNote"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder=""
                 onChange={(event) => {
                   const copy = { ...newContact };
                   copy.HomePhoneNotes = event.target.value;

@@ -5,7 +5,7 @@
 
 *.env
 *.local
-appsettings.Local.json
+appsettings.Local.json0
 02_Db_Seed_Data.sql
 
 # User-specific files

@@ -3,6 +3,7 @@ import { ApplicationViews } from "./Components/views/ApplicationViews";
 import { NavBar } from "./Components/nav/NavBar";
 import { onLoginStatusChange, me } from "./modules/authManager";
 import { useState, useEffect } from "react";
+import { Flowbite } from "flowbite-react";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -50,10 +51,8 @@ function App() {
         path="*"
         element={
           <>
-            <div className="dark">
-              <ApplicationViews />
-              <NavBar />
-            </div>
+            <ApplicationViews />
+            <NavBar />
           </>
         }
       />
