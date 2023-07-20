@@ -1,7 +1,8 @@
 import { Avatar, DarkThemeToggle, Dropdown } from "flowbite-react";
 import { Link } from "react-router-dom";
+import { logout } from "../../modules/authManager";
 
-export const UserNav = () => {
+export const UserNav = ({ userProfile }) => {
   return (
     <div className="">
       <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 ">
@@ -56,9 +57,9 @@ export const UserNav = () => {
                   }
                 >
                   <Dropdown.Header className="dark:text-white">
-                    <span className="block text-sm">Bonnie Green</span>
+                    <span className="block text-sm">{userProfile.name}</span>
                     <span className="block truncate text-sm font-medium">
-                      name@flowbite.com
+                      {userProfile.email}
                     </span>
                   </Dropdown.Header>
                   <Dropdown.Item className="dark:text-white">
@@ -71,7 +72,7 @@ export const UserNav = () => {
                     Earnings
                   </Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item className="dark:text-white">
+                  <Dropdown.Item className="dark:text-white" onClick={logout}>
                     Sign out
                   </Dropdown.Item>
                 </Dropdown>

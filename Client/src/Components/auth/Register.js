@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import { register } from "../modules/authManager";
+import { register } from "../../modules/authManager";
+import { Button, Label, TextInput } from "flowbite-react";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -22,45 +22,45 @@ export default function Register() {
   };
 
   return (
-    <Form onSubmit={registerClick}>
+    <form onSubmit={registerClick}>
       <fieldset>
-        <FormGroup>
+        <div>
           <Label htmlFor="name">Name</Label>
-          <Input
+          <TextInput
             id="name"
             type="text"
             autoFocus
             onChange={(e) => setName(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div>
           <Label for="email">Email</Label>
-          <Input
+          <TextInput
             id="email"
             type="text"
             onChange={(e) => setEmail(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div>
           <Label for="password">Password</Label>
-          <Input
+          <TextInput
             id="password"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div>
           <Label for="confirmPassword">Confirm Password</Label>
-          <Input
+          <TextInput
             id="confirmPassword"
             type="password"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div>
           <Button>Register</Button>
-        </FormGroup>
+        </div>
       </fieldset>
-    </Form>
+    </form>
   );
 }

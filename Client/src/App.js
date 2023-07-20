@@ -1,9 +1,7 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ApplicationViews } from "./Components/views/ApplicationViews";
-import { NavBar } from "./Components/nav/NavBar";
 import { onLoginStatusChange, me } from "./modules/authManager";
 import { useState, useEffect } from "react";
-import { Flowbite } from "flowbite-react";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -46,17 +44,9 @@ function App() {
   }
 
   return (
-    <Routes>
-      <Route
-        path="*"
-        element={
-          <>
-            <ApplicationViews />
-            <NavBar />
-          </>
-        }
-      />
-    </Routes>
+    <BrowserRouter>
+      <ApplicationViews isLoggedIn={isLoggedIn} userProfile={userProfile} />
+    </BrowserRouter>
   );
 }
 

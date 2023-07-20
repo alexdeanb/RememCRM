@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace RememCRM.Repositories
 {
-    public class UserProfileRepository: BaseRepository
+    public class UserProfileRepository : BaseRepository, IUserProfileRepository
     {
         public UserProfileRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -15,7 +15,7 @@ namespace RememCRM.Repositories
             using (SqlConnection conn = Connection)
             {
                 conn.Open();
-                using(SqlCommand cmd = conn.CreateCommand())
+                using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT up.Id, up.Name, up.Email, up.FirebaseUserId, up.OrganizationId, up.UserTypeId,
                                         o.Name as 'OrganizationName', o.PrimaryColor, o.Logo,
@@ -24,7 +24,7 @@ namespace RememCRM.Repositories
                                         JOIN Organization o on up.OrganizationId = o.Id
                                         JOIN UserTypes ut on ut.Id = up.UserTypeId";
 
-                    using(SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         var profiles = new List<UserProfile>();
                         while (reader.Read())
@@ -151,5 +151,24 @@ namespace RememCRM.Repositories
                 }
             }
         }
+
+        public void Update(UserProfile profile)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE UserProfile SET Name = @name, Email = @email, 
+                                        WHERE Id = @id";
+                    DbUtils.AddParameter(cmd, "@name", profile.Name);
+                    DbUtils.AddParameter(cmd, "@email", profile.Email);
+                    DbUtils.AddParameter(cmd, "@id", profile.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

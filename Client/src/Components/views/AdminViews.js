@@ -4,18 +4,15 @@ import { ContactAdd } from "../contacts/ContactAdd";
 import { ToDoList } from "../todolist/ToDoList";
 import { ContactList } from "../contacts/ContactList";
 import { ToDoForm } from "../todolist/ToDoForm";
+import Login from "../auth/Login";
+import Register from "../auth/Register";
 
 export const AdminViews = () => {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <>
-            <Outlet />
-          </>
-        }
-      >
+      <Route path="/">
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
         <Route path="" element={<Home />} />
         <Route path="/ToDos">
           <Route index element={<ToDoList />} />
