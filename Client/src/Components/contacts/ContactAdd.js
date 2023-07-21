@@ -1,32 +1,45 @@
-import { useState } from "react";
-import { TextInput } from "flowbite-react";
+import { useState, useEffect } from "react";
+import { Button, Select, TextInput, Textarea } from "flowbite-react";
+import { getAllStatuses, getAllSources } from "../../modules/ListOptionManager";
+import { addContact } from "../../modules/contactManager";
+import { useNavigate } from "react-router-dom";
 
-export const ContactAdd = () => {
+export const ContactAdd = ({ userProfile }) => {
   const [newContact, setNewContact] = useState({
+    AssignedUserId: userProfile.id,
     PrimaryFirstName: "",
     PrimaryLastName: "",
-    PrimaryEmail: null,
+    PrimaryEmailAddress: null,
     PrimaryDOB: null,
     SecondaryFirstName: null,
     SecondaryLastName: null,
-    SecondaryEmail: null,
+    SecondaryEmailAddress: null,
     SecondaryDOB: null,
     Address: null,
     City: null,
     State: null,
     Zip: null,
     HomePhone: null,
-    HomePhoneNotes: null,
+    HomePhoneNote: null,
     CellPhone: null,
-    CellPhoneNotes: null,
+    CellPhoneNote: null,
     Notes: null,
-    ReferralUserId: null,
+    ReferralContactId: null,
     SourceId: 0,
     StatusId: 0,
   });
 
   const [sources, setSources] = useState([]);
   const [statuses, setStatuses] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    getAllStatuses().then(setStatuses);
+    getAllSources().then(setSources);
+  }, []);
+
+  const addAContact = () => {
+    addContact(newContact).then(navigate("/MyContacts"));
+  };
 
   return (
     <div className="p-4 sm:ml-64">
@@ -83,7 +96,7 @@ export const ContactAdd = () => {
                 type="text"
                 onChange={(event) => {
                   const copy = { ...newContact };
-                  copy.PrimaryEmail = event.target.value;
+                  copy.PrimaryEmailAddress = event.target.value;
                   setNewContact(copy);
                 }}
               />
@@ -152,7 +165,7 @@ export const ContactAdd = () => {
                 type="text"
                 onChange={(event) => {
                   const copy = { ...newContact };
-                  copy.SecondaryEmail = event.target.value;
+                  copy.SecondaryEmailAddress = event.target.value;
                   setNewContact(copy);
                 }}
               />
@@ -295,17 +308,17 @@ export const ContactAdd = () => {
             <label htmlFor="SpecialNotes" className="dark:text-gray-400">
               Special Notes
             </label>
-            <textarea
+            <Textarea
               id="SpecialNotes"
               rows="4"
-              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Write your thoughts here..."
               onChange={(event) => {
                 const copy = { ...newContact };
                 copy.Notes = event.target.value;
                 setNewContact(copy);
               }}
-            ></textarea>
+            />
           </div>
           <div className="flex col-span-2">
             <div className="w-full">
@@ -339,6 +352,55 @@ export const ContactAdd = () => {
               />
             </div>
           </div>
+          <div className="flex col-span-4">
+            <div className="w-full">
+              <label htmlFor="HomePhoneNote" className="dark:text-gray-400">
+                Source
+              </label>
+              <Select
+                onChange={(event) => {
+                  const copy = { ...newContact };
+                  copy.SourceId = parseInt(event.target.value);
+                  setNewContact(copy);
+                }}
+              >
+                <option value="0">Select a Source</option>
+                {sources.map((source) => {
+                  return (
+                    <option value={source.id}>
+                      {source.name} - {source.code}
+                    </option>
+                  );
+                })}
+              </Select>
+            </div>
+          </div>
+          <div className="flex col-span-4">
+            <div className="w-full">
+              <label htmlFor="HomePhoneNote" className="dark:text-gray-400">
+                Status
+              </label>
+              <Select
+                onChange={(event) => {
+                  const copy = { ...newContact };
+                  copy.StatusId = parseInt(event.target.value);
+                  setNewContact(copy);
+                }}
+              >
+                <option value="0">Status?</option>
+                {statuses.map((status) => {
+                  return <option value={status.id}>{status.name}</option>;
+                })}
+              </Select>
+            </div>
+          </div>
+          <div className="col-span-3"></div>
+          <div className="col-span-2">
+            <div>
+              <Button onClick={addAContact}>Submit New Contact</Button>
+            </div>
+          </div>
+          <div className="col-span-3"></div>
         </div>
       </div>
     </div>

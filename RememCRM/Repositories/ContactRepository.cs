@@ -6,7 +6,7 @@ using RememCRM.Utils;
 
 namespace RememCRM.Repositories
 {
-    public class ContactRepository: BaseRepository
+    public class ContactRepository : BaseRepository, IContactRepository
     {
         public ContactRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -15,11 +15,11 @@ namespace RememCRM.Repositories
             using (SqlConnection conn = Connection)
             {
                 conn.Open();
-                using(SqlCommand cmd = conn.CreateCommand())
+                using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                       SELECT c.Id, c.AssignedUserId, c.PrimaryFirstName, c.PrimaryLastName, c.PrimaryEmailAddress, c.PrimaryDOB, C.SecondaryFirstName, c.SecondaryLastName, c.SecondaryEmailAddress, c.SecondaryDOB,
-                                        c.Address, c.City, c.State, c.Zip, c.HomePhone, c.HomePhoneNote, c.CellPhone, c.CellPhoneNote, c.Notes, c.ReferralUserId, c.SourceId, c.StatusId,
+                                        SELECT c.Id, c.AssignedUserId, c.PrimaryFirstName, c.PrimaryLastName, c.PrimaryEmailAddress, c.PrimaryDOB, C.SecondaryFirstName, c.SecondaryLastName, c.SecondaryEmailAddress, c.SecondaryDOB,
+                                        c.Address, c.City, c.State, c.Zip, c.HomePhone, c.HomePhoneNote, c.CellPhone, c.CellPhoneNote, c.Notes, c.ReferralContactId, c.SourceId, c.StatusId,
                                         ss.Name as 'SourceName', ss.Code as 'SourceCode',
                                         st.Name as 'StatusName'
                                         FROM contacts c JOIN sources ss on c.sourceId = ss.Id JOIN Status st on c.StatusId = st.Id
@@ -36,22 +36,22 @@ namespace RememCRM.Repositories
                                 AssignedUserId = DbUtils.GetInt(reader, "AssignedUserId"),
                                 PrimaryFirstName = DbUtils.GetString(reader, "PrimaryFirstName"),
                                 PrimaryLastName = DbUtils.GetString(reader, "PrimaryLastName"),
-                                PrimaryEmail = DbUtils.GetNullableString(reader, "PrimaryEmail"),
+                                PrimaryEmailAddress = DbUtils.GetNullableString(reader, "PrimaryEmailAddress"),
                                 PrimaryDOB = DbUtils.GetNullableDateTime(reader, "PrimaryDOB"),
                                 SecondaryFirstName = DbUtils.GetString(reader, "SecondaryFirstName"),
                                 SecondaryLastName = DbUtils.GetString(reader, "SecondaryLastName"),
-                                SecondaryEmail = DbUtils.GetNullableString(reader, "SecondaryEmail"),
+                                SecondaryEmailAddress = DbUtils.GetNullableString(reader, "SecondaryEmailAddress"),
                                 SecondaryDOB = DbUtils.GetNullableDateTime(reader, "SecondaryDOB"),
                                 Address = DbUtils.GetNullableString(reader, "Address"),
                                 City = DbUtils.GetNullableString(reader, "City"),
                                 State = DbUtils.GetNullableString(reader, "State"),
                                 Zip = DbUtils.GetNullableInt(reader, "Zip"),
                                 HomePhone = DbUtils.GetNullableString(reader, "HomePhone"),
-                                HomePhoneNotes = DbUtils.GetNullableString(reader, "HomePhoneNotes"),
+                                HomePhoneNote = DbUtils.GetNullableString(reader, "HomePhoneNote"),
                                 CellPhone = DbUtils.GetNullableString(reader, "CellPhone"),
-                                CellPhoneNotes = DbUtils.GetNullableString(reader, "CellPhoneNotes"),
+                                CellPhoneNote = DbUtils.GetNullableString(reader, "CellPhoneNote"),
                                 Notes = DbUtils.GetNullableString(reader, "Notes"),
-                                ReferralContactId = DbUtils.GetNullableInt(reader, "ReferralUserId"),
+                                ReferralContactId = DbUtils.GetNullableInt(reader, "ReferralContactId"),
                                 SourceId = DbUtils.GetInt(reader, "SourceId"),
                                 Source = new Source()
                                 {
@@ -80,11 +80,11 @@ namespace RememCRM.Repositories
             using (SqlConnection conn = Connection)
             {
                 conn.Open();
-                using(SqlCommand cmd = conn.CreateCommand())
+                using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
                                        SELECT c.Id, c.AssignedUserId, c.PrimaryFirstName, c.PrimaryLastName, c.PrimaryEmailAddress, c.PrimaryDOB, C.SecondaryFirstName, c.SecondaryLastName, c.SecondaryEmailAddress, c.SecondaryDOB,
-                                        c.Address, c.City, c.State, c.Zip, c.HomePhone, c.HomePhoneNote, c.CellPhone, c.CellPhoneNote, c.Notes, c.ReferralUserId, c.SourceId, c.StatusId,
+                                        c.Address, c.City, c.State, c.Zip, c.HomePhone, c.HomePhoneNote, c.CellPhone, c.CellPhoneNote, c.Notes, c.ReferralContactId, c.SourceId, c.StatusId,
                                         ss.Name as 'SourceName', ss.Code as 'SourceCode',
                                         st.Name as 'StatusName'
                                         FROM contacts c JOIN sources ss on c.sourceId = ss.Id JOIN Status st on c.StatusId = st.Id
@@ -102,22 +102,22 @@ namespace RememCRM.Repositories
                                 AssignedUserId = DbUtils.GetInt(reader, "AssignedUserId"),
                                 PrimaryFirstName = DbUtils.GetString(reader, "PrimaryFirstName"),
                                 PrimaryLastName = DbUtils.GetString(reader, "PrimaryLastName"),
-                                PrimaryEmail = DbUtils.GetNullableString(reader, "PrimaryEmail"),
+                                PrimaryEmailAddress = DbUtils.GetNullableString(reader, "PrimaryEmailAddress"),
                                 PrimaryDOB = DbUtils.GetNullableDateTime(reader, "PrimaryDOB"),
                                 SecondaryFirstName = DbUtils.GetString(reader, "SecondaryFirstName"),
                                 SecondaryLastName = DbUtils.GetString(reader, "SecondaryLastName"),
-                                SecondaryEmail = DbUtils.GetNullableString(reader, "SecondaryEmail"),
+                                SecondaryEmailAddress = DbUtils.GetNullableString(reader, "SecondaryEmailAddress"),
                                 SecondaryDOB = DbUtils.GetNullableDateTime(reader, "SecondaryDOB"),
                                 Address = DbUtils.GetNullableString(reader, "Address"),
                                 City = DbUtils.GetNullableString(reader, "City"),
                                 State = DbUtils.GetNullableString(reader, "State"),
                                 Zip = DbUtils.GetNullableInt(reader, "Zip"),
                                 HomePhone = DbUtils.GetNullableString(reader, "HomePhone"),
-                                HomePhoneNotes = DbUtils.GetNullableString(reader, "HomePhoneNotes"),
+                                HomePhoneNote = DbUtils.GetNullableString(reader, "HomePhoneNote"),
                                 CellPhone = DbUtils.GetNullableString(reader, "CellPhone"),
-                                CellPhoneNotes = DbUtils.GetNullableString(reader, "CellPhoneNotes"),
+                                CellPhoneNote = DbUtils.GetNullableString(reader, "CellPhoneNote"),
                                 Notes = DbUtils.GetNullableString(reader, "Notes"),
-                                ReferralContactId = DbUtils.GetNullableInt(reader, "ReferralUserId"),
+                                ReferralContactId = DbUtils.GetNullableInt(reader, "ReferralContactId"),
                                 SourceId = DbUtils.GetInt(reader, "SourceId"),
                                 Source = new Source()
                                 {
@@ -139,7 +139,7 @@ namespace RememCRM.Repositories
             }
         }
 
-        public Contact GetByUserId(int id)
+        public List<Contact> GetByUserId(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -148,7 +148,7 @@ namespace RememCRM.Repositories
                 {
                     cmd.CommandText = @"
                                        SELECT c.Id, c.AssignedUserId, c.PrimaryFirstName, c.PrimaryLastName, c.PrimaryEmailAddress, c.PrimaryDOB, C.SecondaryFirstName, c.SecondaryLastName, c.SecondaryEmailAddress, c.SecondaryDOB,
-                                        c.Address, c.City, c.State, c.Zip, c.HomePhone, c.HomePhoneNote, c.CellPhone, c.CellPhoneNote, c.Notes, c.ReferralUserId, c.SourceId, c.StatusId,
+                                        c.Address, c.City, c.State, c.Zip, c.HomePhone, c.HomePhoneNote, c.CellPhone, c.CellPhoneNote, c.Notes, c.ReferralContactId, c.SourceId, c.StatusId,
                                         ss.Name as 'SourceName', ss.Code as 'SourceCode',
                                         st.Name as 'StatusName'
                                         FROM contacts c JOIN sources ss on c.sourceId = ss.Id JOIN Status st on c.StatusId = st.Id
@@ -157,31 +157,31 @@ namespace RememCRM.Repositories
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Contact contact = null;
-                        if (reader.Read())
+                        var contacts = new List<Contact>();
+                        while (reader.Read())
                         {
-                            contact = new Contact()
+                            contacts.Add(new Contact()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 AssignedUserId = DbUtils.GetInt(reader, "AssignedUserId"),
                                 PrimaryFirstName = DbUtils.GetString(reader, "PrimaryFirstName"),
                                 PrimaryLastName = DbUtils.GetString(reader, "PrimaryLastName"),
-                                PrimaryEmail = DbUtils.GetNullableString(reader, "PrimaryEmail"),
+                                PrimaryEmailAddress = DbUtils.GetNullableString(reader, "PrimaryEmailAddress"),
                                 PrimaryDOB = DbUtils.GetNullableDateTime(reader, "PrimaryDOB"),
                                 SecondaryFirstName = DbUtils.GetString(reader, "SecondaryFirstName"),
                                 SecondaryLastName = DbUtils.GetString(reader, "SecondaryLastName"),
-                                SecondaryEmail = DbUtils.GetNullableString(reader, "SecondaryEmail"),
+                                SecondaryEmailAddress = DbUtils.GetNullableString(reader, "SecondaryEmailAddress"),
                                 SecondaryDOB = DbUtils.GetNullableDateTime(reader, "SecondaryDOB"),
                                 Address = DbUtils.GetNullableString(reader, "Address"),
                                 City = DbUtils.GetNullableString(reader, "City"),
                                 State = DbUtils.GetNullableString(reader, "State"),
                                 Zip = DbUtils.GetNullableInt(reader, "Zip"),
                                 HomePhone = DbUtils.GetNullableString(reader, "HomePhone"),
-                                HomePhoneNotes = DbUtils.GetNullableString(reader, "HomePhoneNotes"),
+                                HomePhoneNote = DbUtils.GetNullableString(reader, "HomePhoneNote"),
                                 CellPhone = DbUtils.GetNullableString(reader, "CellPhone"),
-                                CellPhoneNotes = DbUtils.GetNullableString(reader, "CellPhoneNotes"),
+                                CellPhoneNote = DbUtils.GetNullableString(reader, "CellPhoneNote"),
                                 Notes = DbUtils.GetNullableString(reader, "Notes"),
-                                ReferralContactId = DbUtils.GetNullableInt(reader, "ReferralUserId"),
+                                ReferralContactId = DbUtils.GetNullableInt(reader, "ReferralContactId"),
                                 SourceId = DbUtils.GetInt(reader, "SourceId"),
                                 Source = new Source()
                                 {
@@ -195,9 +195,9 @@ namespace RememCRM.Repositories
                                     Id = DbUtils.GetInt(reader, "StatusId"),
                                     Name = DbUtils.GetString(reader, "StatusName")
                                 }
-                            };
+                            });
                         }
-                        return contact;
+                        return contacts;
                     }
                 }
             }
@@ -209,9 +209,40 @@ namespace RememCRM.Repositories
             using (SqlConnection conn = Connection)
             {
                 conn.Open();
-                using(SqlCommand cmd = conn.CreateCommand())
+                using (SqlCommand cmd = conn.CreateCommand())
                 {
-                   
+                    cmd.CommandText = @"INSERT INTO Contacts (AssignedUserId, PrimaryFirstName, PrimaryLastName, PrimaryEmailAddress,
+                      PrimaryDOB, SecondaryFirstName, SecondaryLastName, SecondaryEmailAddress, SecondaryDOB, 
+                      Address, City, State, Zip, HomePhone, HomePhoneNote, CellPhone, CellPhoneNote, Notes, ReferralContactId,
+                      SourceId, StatusId)
+                      OUTPUT INSERTED.Id
+                      Values (@AssignedUserId, @PrimaryFirstName, @PrimaryLastName, @PrimaryEmailAddress,
+                      @PrimaryDOB, @SecondaryFirstName, @SecondaryLastName, @SecondaryEmailAddress, @SecondaryDOB, 
+                      @Address, @City, @State, @Zip, @HomePhone, @HomePhoneNote, @CellPhone, @CellPhoneNote, @Notes, @ReferralContactId,
+                      @SourceId, @StatusId)";
+                    DbUtils.AddParameter(cmd, "@AssignedUserId", contact.AssignedUserId);
+                    DbUtils.AddParameter(cmd, "@PrimaryFirstName", contact.PrimaryFirstName);
+                    DbUtils.AddParameter(cmd, "@PrimaryLastName", contact.PrimaryLastName);
+                    DbUtils.AddParameter(cmd, "@PrimaryEmailAddress", contact.PrimaryEmailAddress);
+                    DbUtils.AddParameter(cmd, "@PrimaryDOB", contact.PrimaryDOB);
+                    DbUtils.AddParameter(cmd, "@SecondaryFirstName", contact.SecondaryFirstName);
+                    DbUtils.AddParameter(cmd, "@SecondaryLastName", contact.SecondaryLastName);
+                    DbUtils.AddParameter(cmd, "@SecondaryEmailAddress", contact.SecondaryEmailAddress);
+                    DbUtils.AddParameter(cmd, "@SecondaryDOB", contact.SecondaryDOB);
+                    DbUtils.AddParameter(cmd, "@Address", contact.Address);
+                    DbUtils.AddParameter(cmd, "@City", contact.City);
+                    DbUtils.AddParameter(cmd, "@State", contact.State);
+                    DbUtils.AddParameter(cmd, "@Zip", contact.Zip);
+                    DbUtils.AddParameter(cmd, "@HomePhone", contact.HomePhone);
+                    DbUtils.AddParameter(cmd, "@HomePhoneNote", contact.HomePhoneNote);
+                    DbUtils.AddParameter(cmd, "@CellPhone", contact.CellPhone);
+                    DbUtils.AddParameter(cmd, "@CellPhoneNote", contact.CellPhoneNote);
+                    DbUtils.AddParameter(cmd, "@Notes", contact.Notes);
+                    DbUtils.AddParameter(cmd, "@ReferralContactId", contact.ReferralContactId);
+                    DbUtils.AddParameter(cmd, "@SourceId", contact.SourceId);
+                    DbUtils.AddParameter(cmd, "@StatusId", contact.StatusId);
+
+                    contact.Id = (int)cmd.ExecuteScalar();
                 }
             }
         }

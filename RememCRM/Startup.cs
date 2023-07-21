@@ -50,9 +50,31 @@ namespace RememCRM
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RememCRM", Version = "v1" });
+
+                var securitySchema = new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    BearerFormat = "JWT",
+                    Description = "JWT Authorization header using the Bearer scheme.",
+                    Type = SecuritySchemeType.ApiKey,
+                    In = ParameterLocation.Header,
+                    Reference = new OpenApiReference
+                    {
+                        Id = "Bearer",
+                        Type = ReferenceType.SecurityScheme,
+                    }
+                };
+
+                c.AddSecurityDefinition("Bearer", securitySchema);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { securitySchema, new[] { "Bearer"} }
+                });
             });
             services.AddTransient<IListOptionRepository, ListOptionRepository>();
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            services.AddTransient<ISourceRepository, SourceRepository>();
+            services.AddTransient<IContactRepository, ContactRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

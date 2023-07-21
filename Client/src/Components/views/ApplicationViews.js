@@ -9,21 +9,21 @@ export const ApplicationViews = ({ isLoggedIn, userProfile }) => {
     return (
       <>
         <NavBar userProfile={userProfile} />
-        <DefaultView />;
+        <DefaultView userProfile={userProfile} />;
       </>
     );
   } else if (userProfile.userTypeId === 1) {
     return (
       <>
         <NavBar userProfile={userProfile} />
-        <UserViews />;
+        <UserViews userProfile={userProfile} />;
       </>
     );
   } else if (userProfile.userTypeId === 2) {
     return (
       <>
         <NavBar userProfile={userProfile} />
-        <AdminViews />;
+        <AdminViews userProfile={userProfile} />;
       </>
     );
   } else {

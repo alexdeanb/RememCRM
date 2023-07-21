@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace RememCRM.Repositories
 {
-    public class SourceRepository: BaseRepository
+    public class SourceRepository : BaseRepository, ISourceRepository
     {
         public SourceRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -28,7 +28,7 @@ namespace RememCRM.Repositories
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name"),
-                                Code = DbUtils.GetString(reader,"Code")
+                                Code = DbUtils.GetString(reader, "Code")
                             });
                         }
                         return Sources;

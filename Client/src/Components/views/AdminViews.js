@@ -7,7 +7,7 @@ import { ToDoForm } from "../todolist/ToDoForm";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
 
-export const AdminViews = () => {
+export const AdminViews = ({ userProfile }) => {
   return (
     <Routes>
       <Route path="/">
@@ -16,10 +16,16 @@ export const AdminViews = () => {
         <Route path="" element={<Home />} />
         <Route path="/ToDos">
           <Route index element={<ToDoList />} />
-          <Route path="Add" element={<ToDoForm />} />
+          <Route path="Add" element={<ToDoForm userProfile={userProfile} />} />
         </Route>
-        <Route path="/addContact" element={<ContactAdd />} />
-        <Route path="/MyContacts" element={<ContactList />} />
+        <Route
+          path="/addContact"
+          element={<ContactAdd userProfile={userProfile} />}
+        />
+        <Route
+          path="/MyContacts"
+          element={<ContactList userProfile={userProfile} />}
+        />
       </Route>
     </Routes>
   );

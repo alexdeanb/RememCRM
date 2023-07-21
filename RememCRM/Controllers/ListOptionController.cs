@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using RememCRM.Repositories;
 using RememCRM.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RememCRM.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
+    [Route("api/Static")]
     [ApiController]
     public class ListOptionController : ControllerBase
     {
@@ -16,43 +18,43 @@ namespace RememCRM.Controllers
             _listOptionRepository = listOptionRepository;
         }
 
-        [HttpGet("/UserTypes")]
+        [HttpGet("UserTypes")]
         public IActionResult GetUserTypes()
         {
             return Ok(_listOptionRepository.GetAllUserTypes());
         }
 
-        [HttpGet("/ContractTypes")]
+        [HttpGet("ContractTypes")]
         public IActionResult GetContractTypes()
         {
             return Ok(_listOptionRepository.GetAllContractTypes());
         }
 
-        [HttpGet("/Relationships")]
+        [HttpGet("Relationships")]
         public IActionResult GetRelationships()
         {
             return Ok(_listOptionRepository.GetAllRelationships());
         }
 
-        [HttpGet("/BurialTypes")]
+        [HttpGet("BurialTypes")]
         public IActionResult GetBurialTypes()
         {
             return Ok(_listOptionRepository.GetAllBurialTypes());
         }
 
-        [HttpGet("/ServiceTypes")]
+        [HttpGet("ServiceTypes")]
         public IActionResult GetServiceTypes()
         {
             return Ok(_listOptionRepository.GetAllServiceTypes());
         }
 
-        [HttpGet("/Priorities")]
+        [HttpGet("Priorities")]
         public IActionResult GetPriorities()
         {
             return Ok(_listOptionRepository.GetAllPriorities());
         }
 
-        [HttpGet("/Statuses")]
+        [HttpGet("Statuses")]
         public IActionResult GetStatuses()
         {
             return Ok(_listOptionRepository.GetAllStatuses());

@@ -56,25 +56,17 @@ export const UserNav = ({ userProfile }) => {
                     />
                   }
                 >
-                  <Dropdown.Header className="dark:text-white">
+                  <Dropdown.Header>
                     <span className="block text-sm">{userProfile.name}</span>
                     <span className="block truncate text-sm font-medium">
                       {userProfile.email}
                     </span>
                   </Dropdown.Header>
-                  <Dropdown.Item className="dark:text-white">
-                    Dashboard
-                  </Dropdown.Item>
-                  <Dropdown.Item className="dark:text-white">
-                    Settings
-                  </Dropdown.Item>
-                  <Dropdown.Item className="dark:text-white">
-                    Earnings
-                  </Dropdown.Item>
+                  <Dropdown.Item>Dashboard</Dropdown.Item>
+                  <Dropdown.Item>Settings</Dropdown.Item>
+                  <Dropdown.Item>Earnings</Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item className="dark:text-white" onClick={logout}>
-                    Sign out
-                  </Dropdown.Item>
+                  <Dropdown.Item onClick={logout}>Sign out</Dropdown.Item>
                 </Dropdown>
               </div>
             </div>
