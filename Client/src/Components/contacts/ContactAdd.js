@@ -297,7 +297,7 @@ export const ContactAdd = ({ userProfile }) => {
                 type="text"
                 onChange={(event) => {
                   const copy = { ...newContact };
-                  copy.CellPhoneNotes = event.target.value;
+                  copy.CellPhoneNote = event.target.value;
                   setNewContact(copy);
                 }}
               />
@@ -346,7 +346,7 @@ export const ContactAdd = ({ userProfile }) => {
                 type="text"
                 onChange={(event) => {
                   const copy = { ...newContact };
-                  copy.HomePhoneNotes = event.target.value;
+                  copy.HomePhoneNote = event.target.value;
                   setNewContact(copy);
                 }}
               />

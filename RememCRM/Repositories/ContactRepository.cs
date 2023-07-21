@@ -246,6 +246,46 @@ namespace RememCRM.Repositories
                 }
             }
         }
+        public void UpdateContact(Contact contact)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Contacts
+                      SET AssignedUserId = @AssignedUserId, PrimaryFirstName = @PrimaryFirstName, PrimaryLastName = @PrimaryLastName, PrimaryEmailAddress = @PrimaryEmailAddress,
+                      PrimaryDOB = @PrimaryDOB, SecondaryFirstName = @SecondaryFirstName, SecondaryLastName = @SecondaryLastName, SecondaryEmailAddress = @SecondaryEmailAddress, SecondaryDOB = @SecondaryDOB, 
+                      Address = @Address, City = @City, State = @State, Zip = @Zip, HomePhone = @HomePhone, HomePhoneNote = @HomePhoneNote, CellPhone = @CellPhone, CellPhoneNote = @CellPhoneNote, Notes = @Notes,
+                      ReferralContactId = @ReferralContactId, SourceId = @SourceId, StatusId = @StatusId
+                      WHERE Id = @Id";
 
+                    DbUtils.AddParameter(cmd, "@AssignedUserId", contact.AssignedUserId);
+                    DbUtils.AddParameter(cmd, "@PrimaryFirstName", contact.PrimaryFirstName);
+                    DbUtils.AddParameter(cmd, "@PrimaryLastName", contact.PrimaryLastName);
+                    DbUtils.AddParameter(cmd, "@PrimaryEmailAddress", contact.PrimaryEmailAddress);
+                    DbUtils.AddParameter(cmd, "@PrimaryDOB", contact.PrimaryDOB);
+                    DbUtils.AddParameter(cmd, "@SecondaryFirstName", contact.SecondaryFirstName);
+                    DbUtils.AddParameter(cmd, "@SecondaryLastName", contact.SecondaryLastName);
+                    DbUtils.AddParameter(cmd, "@SecondaryEmailAddress", contact.SecondaryEmailAddress);
+                    DbUtils.AddParameter(cmd, "@SecondaryDOB", contact.SecondaryDOB);
+                    DbUtils.AddParameter(cmd, "@Address", contact.Address);
+                    DbUtils.AddParameter(cmd, "@City", contact.City);
+                    DbUtils.AddParameter(cmd, "@State", contact.State);
+                    DbUtils.AddParameter(cmd, "@Zip", contact.Zip);
+                    DbUtils.AddParameter(cmd, "@HomePhone", contact.HomePhone);
+                    DbUtils.AddParameter(cmd, "@HomePhoneNote", contact.HomePhoneNote);
+                    DbUtils.AddParameter(cmd, "@CellPhone", contact.CellPhone);
+                    DbUtils.AddParameter(cmd, "@CellPhoneNote", contact.CellPhoneNote);
+                    DbUtils.AddParameter(cmd, "@Notes", contact.Notes);
+                    DbUtils.AddParameter(cmd, "@ReferralContactId", contact.ReferralContactId);
+                    DbUtils.AddParameter(cmd, "@SourceId", contact.SourceId);
+                    DbUtils.AddParameter(cmd, "@StatusId", contact.StatusId);
+                    DbUtils.AddParameter(cmd, "@Id", contact.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@ import { ContactList } from "../contacts/ContactList";
 import { ToDoForm } from "../todolist/ToDoForm";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
+import { ContactEdit } from "../contacts/ContactEdit";
 
 export const AdminViews = ({ userProfile }) => {
   return (
@@ -25,6 +26,10 @@ export const AdminViews = ({ userProfile }) => {
         <Route
           path="/MyContacts"
           element={<ContactList userProfile={userProfile} />}
+        />
+        <Route
+          path="EditContact/:id"
+          element={<ContactEdit userProfile={userProfile} />}
         />
       </Route>
     </Routes>

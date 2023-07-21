@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RememCRM.Repositories;
 using RememCRM.Models;
+using Microsoft.Extensions.Hosting;
 
 namespace RememCRM.Controllers
 {
@@ -51,6 +52,17 @@ namespace RememCRM.Controllers
 
             _contactRepository.AddContact(contact);
             return CreatedAtAction(nameof(Get), new { id = contact.Id }, contact);
+        }
+
+        [HttpPut("update/{id}")]
+        public IActionResult Put(Contact contact)
+        {
+            if (contact == null)
+            {
+                return BadRequest();
+            }
+            _contactRepository.UpdateContact(contact);
+            return CreatedAtAction("Get", new { id = contact.Id }, contact);
         }
     }
 }

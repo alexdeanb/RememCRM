@@ -9,5 +9,6 @@ namespace RememCRM.Repositories
         List<Contact> GetAll();
         Contact GetById(int id);
         List<Contact> GetByUserId(int id);
+        void UpdateContact(Contact contact);
     }
 }
