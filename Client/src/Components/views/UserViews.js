@@ -5,6 +5,7 @@ import { ToDoList } from "../todolist/ToDoList";
 import { ContactList } from "../contacts/ContactList";
 import { ToDoForm } from "../todolist/ToDoForm";
 import { ContactEdit } from "../contacts/ContactEdit";
+import { ContactDetails } from "../contacts/ContactDetails";
 
 export const UserViews = ({ userProfile }) => {
   return (
@@ -26,12 +27,12 @@ export const UserViews = ({ userProfile }) => {
           path="addContact"
           element={<ContactAdd userProfile={userProfile} />}
         />
+      </Route>
+      <Route path="/MyContacts">
+        <Route index element={<ContactList userProfile={userProfile} />} />
+        <Route path="details/:id" element={<ContactDetails />} />
         <Route
-          path="MyContacts"
-          element={<ContactList userProfile={userProfile} />}
-        />
-        <Route
-          path="EditContact/:id"
+          path="edit/:id"
           element={<ContactEdit userProfile={userProfile} />}
         />
       </Route>
