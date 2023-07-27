@@ -4,7 +4,7 @@ import { DefaultView } from "./DefaultView";
 import { UserViews } from "./UserViews";
 import { useEffect } from "react";
 
-export const ApplicationViews = ({ isLoggedIn, userProfile }) => {
+export const ApplicationViews = ({ userProfile, userToDos, setUserToDos }) => {
   if (userProfile === null) {
     return (
       <>
@@ -15,15 +15,25 @@ export const ApplicationViews = ({ isLoggedIn, userProfile }) => {
   } else if (userProfile.userTypeId === 1) {
     return (
       <>
-        <NavBar userProfile={userProfile} />
-        <UserViews userProfile={userProfile} />;
+        <NavBar userProfile={userProfile} userToDos={userToDos} />
+        <UserViews
+          userProfile={userProfile}
+          userToDos={userToDos}
+          setUserToDos={setUserToDos}
+        />
+        ;
       </>
     );
   } else if (userProfile.userTypeId === 2) {
     return (
       <>
-        <NavBar userProfile={userProfile} />
-        <AdminViews userProfile={userProfile} />;
+        <NavBar userProfile={userProfile} userToDos={userToDos} />
+        <AdminViews
+          userProfile={userProfile}
+          userToDos={userToDos}
+          setUserToDos={setUserToDos}
+        />
+        ;
       </>
     );
   } else {

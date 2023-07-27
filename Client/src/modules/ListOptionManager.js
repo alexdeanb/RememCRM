@@ -14,7 +14,7 @@ export const getAllUserTypes = () => {
         return resp.json();
       } else {
         throw new Error(
-          "An unknown error occurred while trying to get videos."
+          "An unknown error occurred while trying to get User Types."
         );
       }
     });
@@ -32,7 +32,7 @@ export const getAllContractTypes = () => {
         return resp.json();
       } else {
         throw new Error(
-          "An unknown error occurred while trying to get videos."
+          "An unknown error occurred while trying to get Contract Types."
         );
       }
     });
@@ -50,7 +50,7 @@ export const getAllRelationships = () => {
         return resp.json();
       } else {
         throw new Error(
-          "An unknown error occurred while trying to get videos."
+          "An unknown error occurred while trying to get Relationships."
         );
       }
     });
@@ -68,7 +68,7 @@ export const getAllBurialTypes = () => {
         return resp.json();
       } else {
         throw new Error(
-          "An unknown error occurred while trying to get videos."
+          "An unknown error occurred while trying to get Burial Types."
         );
       }
     });
@@ -86,7 +86,7 @@ export const getAllServiceTypes = () => {
         return resp.json();
       } else {
         throw new Error(
-          "An unknown error occurred while trying to get videos."
+          "An unknown error occurred while trying to get Service Types."
         );
       }
     });
@@ -104,7 +104,7 @@ export const getAllPriorities = () => {
         return resp.json();
       } else {
         throw new Error(
-          "An unknown error occurred while trying to get videos."
+          "An unknown error occurred while trying to get Priorities."
         );
       }
     });
@@ -122,7 +122,7 @@ export const getAllStatuses = () => {
         return resp.json();
       } else {
         throw new Error(
-          "An unknown error occurred while trying to get videos."
+          "An unknown error occurred while trying to get Statuses."
         );
       }
     });
@@ -141,7 +141,7 @@ export const getAllSources = () => {
         return resp.json();
       } else {
         throw new Error(
-          "An unknown error occurred while trying to get videos."
+          "An unknown error occurred while trying to get Sources."
         );
       }
     });

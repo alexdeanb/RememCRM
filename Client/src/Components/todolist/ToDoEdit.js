@@ -1,22 +1,20 @@
 import { Button, Label, Select, TextInput, Textarea } from "flowbite-react";
 import { useEffect, useState } from "react";
 import "flowbite";
+import Datepicker from "tailwind-datepicker-react";
 import { getAllPriorities } from "../../modules/ListOptionManager";
 import { getAllUserContacts } from "../../modules/contactManager";
-import { addToDo } from "../../modules/ToDoManager";
-import { useNavigate } from "react-router-dom";
+import { addToDo, editToDo, getAllUserToDos } from "../../modules/ToDoManager";
+import { useNavigate, useParams } from "react-router-dom";
 import { ContactModal } from "../spareparts/ContactModal";
+import { getAllToDoById } from "../../modules/ToDoManager";
 
-export const ToDoForm = ({ userProfile, userToDos, setUserToDos }) => {
-  const defaultDate = new Date();
-  const [ToDo, setToDo] = useState({
-    UserId: 0,
-    Description: "",
-    ContactId: 0,
-    PriorityId: 0,
-    Due: defaultDate.toISOString(),
-    Completed: false,
-  });
+export const ToDoEdit = ({ userProfile, setUserToDos }) => {
+  const [editingToDo, setEditingToDo] = useState();
+
+  const { id } = useParams();
+
+  const [ToDo, setToDo] = useState();
 
   const [priorities, setPriorities] = useState([]);
   const [contacts, setContacts] = useState([]);
@@ -27,31 +25,31 @@ export const ToDoForm = ({ userProfile, userToDos, setUserToDos }) => {
   useEffect(() => {
     getAllPriorities().then(setPriorities);
     getAllUserContacts(userProfile.id).then(setContacts);
-    setUserId(userProfile.id);
+    getAllToDoById(id).then(setEditingToDo);
   }, []);
 
   useEffect(() => {
-    const copy = { ...ToDo };
-    copy.UserId = userId;
-    setToDo(copy);
+    const copy = { ...editingToDo };
+    copy.userId = userId;
+    setEditingToDo(copy);
   }, [userId]);
 
   useEffect(() => {
-    const copy = { ...ToDo };
-    copy.ContactId = chosenContact;
-    setToDo(copy);
+    const copy = { ...editingToDo };
+    copy.contactId = chosenContact;
+    setEditingToDo(copy);
   }, [chosenContact]);
 
   const navigate = useNavigate();
 
   const handleToDoSubmit = () => {
-    addToDo(ToDo).then(() => {
+    editToDo(editingToDo).then(() => {
       setUserToDos();
       navigate("/ToDos");
     });
   };
 
-  if (priorities.length > 0) {
+  if (editingToDo) {
     return (
       <div className="p-4 sm:ml-64">
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
@@ -62,12 +60,13 @@ export const ToDoForm = ({ userProfile, userToDos, setUserToDos }) => {
               </Label>
               <Textarea
                 id="summary"
+                value={editingToDo.description}
                 required
                 rows={4}
                 onChange={(event) => {
-                  const copy = { ...ToDo };
-                  copy.Description = event.target.value;
-                  setToDo(copy);
+                  const copy = { ...editingToDo };
+                  copy.description = event.target.value;
+                  setEditingToDo(copy);
                 }}
               />
             </div>
@@ -100,9 +99,9 @@ export const ToDoForm = ({ userProfile, userToDos, setUserToDos }) => {
                 sizing="md"
                 type="date"
                 onChange={(event) => {
-                  const copy = { ...ToDo };
+                  const copy = { ...editingToDo };
                   copy.Due = event.target.value;
-                  setToDo(copy);
+                  setEditingToDo(copy);
                 }}
               />
             </div>
@@ -111,10 +110,11 @@ export const ToDoForm = ({ userProfile, userToDos, setUserToDos }) => {
               <Select
                 id="priority"
                 onChange={(event) => {
-                  const copy = { ...ToDo };
-                  copy.PriorityId = parseInt(event.target.value);
-                  setToDo(copy);
+                  const copy = { ...editingToDo };
+                  copy.priorityId = parseInt(event.target.value);
+                  setEditingToDo(copy);
                 }}
+                value={editingToDo.priorityId}
               >
                 <option value={0}>Select a Priority</option>
                 {priorities.map((priority) => {
@@ -129,7 +129,7 @@ export const ToDoForm = ({ userProfile, userToDos, setUserToDos }) => {
             <div className="col-span-3" />
             <div className="col-span-3">
               <Button className="w-full" onClick={handleToDoSubmit}>
-                ADD TODO
+                UPDATE TODO
               </Button>
             </div>
             <div className="col-span-3" />

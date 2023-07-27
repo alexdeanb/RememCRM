@@ -1,10 +1,10 @@
 import { getToken } from "./authManager";
 
-const apiUrl = "/api/Contact";
+const baseUrl = "/api/ToDo";
 
-export const getAllContacts = () => {
+export const getAllUserToDos = (id) => {
   return getToken().then((token) => {
-    return fetch(apiUrl, {
+    return fetch(`${baseUrl}/User/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -14,16 +14,16 @@ export const getAllContacts = () => {
         return resp.json();
       } else {
         throw new Error(
-          "An unknown error occurred while trying to get all contacts."
+          "An unknown error occurred while trying to get user ToDos."
         );
       }
     });
   });
 };
 
-export const getAllUserContacts = (id) => {
+export const getAllToDoById = (id) => {
   return getToken().then((token) => {
-    return fetch(`${apiUrl}/user/${id}`, {
+    return fetch(`${baseUrl}/Item/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -33,41 +33,22 @@ export const getAllUserContacts = (id) => {
         return resp.json();
       } else {
         throw new Error(
-          "An unknown error occurred while trying to get all user contacts."
+          "An unknown error occurred while trying to get that ToDo."
         );
       }
     });
   });
 };
 
-export const getContactById = (id) => {
+export const addToDo = (toDo) => {
   return getToken().then((token) => {
-    return fetch(`${apiUrl}/contact/${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }).then((resp) => {
-      if (resp.ok) {
-        return resp.json();
-      } else {
-        throw new Error(
-          "An unknown error occurred while trying to get contact by Id."
-        );
-      }
-    });
-  });
-};
-
-export const addContact = (contact) => {
-  return getToken().then((token) => {
-    return fetch(apiUrl, {
+    return fetch(baseUrl, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(contact),
+      body: JSON.stringify(toDo),
     }).then((resp) => {
       if (resp.ok) {
         return resp.json();
@@ -75,32 +56,38 @@ export const addContact = (contact) => {
         throw new Error("Unauthorized");
       } else {
         throw new Error(
-          "An unknown error occurred while trying to save a new contact."
+          "An unknown error occurred while trying to save a new ToDo."
         );
       }
     });
   });
 };
 
-export const editContact = (contact) => {
+export const editToDo = (toDo) => {
   return getToken().then((token) => {
-    return fetch(`${apiUrl}/update/${contact.id}`, {
+    return fetch(`${baseUrl}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(contact),
+      body: JSON.stringify(toDo),
     }).then((resp) => {
       if (resp.ok) {
-        return resp.json();
+        return;
       } else if (resp.status === 401) {
         throw new Error("Unauthorized");
       } else {
         throw new Error(
-          "An unknown error occurred while trying to update a contact."
+          "An unknown error occurred while trying to update a ToDo."
         );
       }
     });
+  });
+};
+
+export const deleteToDo = (id) => {
+  return fetch(`${baseUrl}/${id}`, {
+    method: "DELETE",
   });
 };

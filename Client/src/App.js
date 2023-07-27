@@ -2,10 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ApplicationViews } from "./Components/views/ApplicationViews";
 import { onLoginStatusChange, me } from "./modules/authManager";
 import { useState, useEffect } from "react";
+import { getAllUserToDos } from "./modules/ToDoManager";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
+  const [userToDos, setUserToDos] = useState();
 
   useEffect(() => {
     onLoginStatusChange(setIsLoggedIn);
@@ -18,6 +20,16 @@ function App() {
       setUserProfile(null);
     }
   }, [isLoggedIn]);
+
+  const setUserToDosByUser = () => {
+    getAllUserToDos(userProfile.id).then(setUserToDos);
+  };
+
+  useEffect(() => {
+    if (isLoggedIn && userProfile) {
+      setUserToDosByUser();
+    }
+  }, [userProfile]);
 
   if (isLoggedIn === null) {
     return (
@@ -45,7 +57,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ApplicationViews isLoggedIn={isLoggedIn} userProfile={userProfile} />
+      <ApplicationViews
+        isLoggedIn={isLoggedIn}
+        userProfile={userProfile}
+        userToDos={userToDos}
+        setUserToDos={setUserToDosByUser}
+      />
     </BrowserRouter>
   );
 }

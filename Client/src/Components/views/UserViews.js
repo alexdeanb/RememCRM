@@ -6,8 +6,9 @@ import { ContactList } from "../contacts/ContactList";
 import { ToDoForm } from "../todolist/ToDoForm";
 import { ContactEdit } from "../contacts/ContactEdit";
 import { ContactDetails } from "../contacts/ContactDetails";
+import { ToDoEdit } from "../todolist/ToDoEdit";
 
-export const UserViews = ({ userProfile }) => {
+export const UserViews = ({ userProfile, userToDos, setUserToDos }) => {
   return (
     <Routes>
       <Route
@@ -20,8 +21,36 @@ export const UserViews = ({ userProfile }) => {
       >
         <Route path="" element={<Home />} />
         <Route path="/ToDos">
-          <Route index element={<ToDoList />} />
-          <Route path="Add" element={<ToDoForm userProfile={userProfile} />} />
+          <Route
+            index
+            element={
+              <ToDoList
+                userProfile={userProfile}
+                userToDos={userToDos}
+                setUserToDos={setUserToDos}
+              />
+            }
+          />
+          <Route
+            path="Add"
+            element={
+              <ToDoForm
+                userProfile={userProfile}
+                userToDos={userToDos}
+                setUserToDos={setUserToDos}
+              />
+            }
+          />
+          <Route
+            path="edit/:id"
+            element={
+              <ToDoEdit
+                userProfile={userProfile}
+                userToDos={userToDos}
+                setUserToDos={setUserToDos}
+              />
+            }
+          />
         </Route>
         <Route
           path="addContact"

@@ -3,9 +3,14 @@ import { Button, Select, TextInput, Textarea } from "flowbite-react";
 import { getAllStatuses, getAllSources } from "../../modules/ListOptionManager";
 import { editContact, getContactById } from "../../modules/contactManager";
 import { useNavigate, useParams } from "react-router-dom";
+import { Label } from "flowbite-react";
+import { ContactModal } from "../spareparts/ContactModal";
 
 export const ContactEdit = ({ userProfile }) => {
   const [contact, setContact] = useState({ id: 0 });
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [chosenContact, setChosenContact] = useState(0);
 
   const [sources, setSources] = useState([]);
   const [statuses, setStatuses] = useState([]);
@@ -17,6 +22,12 @@ export const ContactEdit = ({ userProfile }) => {
     getAllSources().then(setSources);
     getContactById(id).then(setContact);
   }, []);
+
+  useEffect(() => {
+    const copy = { ...contact };
+    copy.referralContactId = chosenContact;
+    setContact(copy);
+  }, [chosenContact]);
 
   const updateContact = () => {
     editContact(contact).then(navigate("/MyContacts"));
@@ -36,9 +47,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-2">
               <div className="w-full">
-                <label htmlFor="first_name" className="dark:text-gray-400">
+                <Label htmlFor="first_name" className="dark:text-gray-400">
                   First name
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -54,9 +65,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-2">
               <div className="w-full">
-                <label htmlFor="last_name" className="dark:text-gray-400">
+                <Label htmlFor="last_name" className="dark:text-gray-400">
                   Last name
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -72,9 +83,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-2">
               <div className="w-full">
-                <label htmlFor="email_address" className="dark:text-gray-400">
+                <Label htmlFor="email_address" className="dark:text-gray-400">
                   Email Address
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -89,9 +100,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-1">
               <div className="w-full">
-                <label htmlFor="last_name" className="dark:text-gray-400">
+                <Label htmlFor="last_name" className="dark:text-gray-400">
                   DOB
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="date"
@@ -113,9 +124,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-2">
               <div className="w-full">
-                <label htmlFor="first_name" className="dark:text-gray-400">
+                <Label htmlFor="first_name" className="dark:text-gray-400">
                   First name
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -130,9 +141,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-2">
               <div className="w-full">
-                <label htmlFor="last_name" className="dark:text-gray-400">
+                <Label htmlFor="last_name" className="dark:text-gray-400">
                   Last name
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -147,9 +158,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-2">
               <div className="w-full">
-                <label htmlFor="email_address" className="dark:text-gray-400">
+                <Label htmlFor="email_address" className="dark:text-gray-400">
                   Email Address
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -164,9 +175,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-1">
               <div className="w-full">
-                <label htmlFor="last_name" className="dark:text-gray-400">
+                <Label htmlFor="last_name" className="dark:text-gray-400">
                   DOB
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="date"
@@ -182,9 +193,9 @@ export const ContactEdit = ({ userProfile }) => {
             <hr className="col-span-8" />
             <div className="flex col-span-3">
               <div className="w-full">
-                <label htmlFor="first_name" className="dark:text-gray-400">
+                <Label htmlFor="first_name" className="dark:text-gray-400">
                   Address
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -200,9 +211,9 @@ export const ContactEdit = ({ userProfile }) => {
             <div className="flex col-span-5"></div>
             <div className="flex col-span-1">
               <div className="w-full">
-                <label htmlFor="city" className="dark:text-gray-400">
+                <Label htmlFor="city" className="dark:text-gray-400">
                   City
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -217,9 +228,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-1">
               <div className="w-full">
-                <label htmlFor="state" className="dark:text-gray-400">
+                <Label htmlFor="state" className="dark:text-gray-400">
                   State
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -234,9 +245,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-1">
               <div className="w-full">
-                <label htmlFor="zip" className="dark:text-gray-400">
+                <Label htmlFor="zip" className="dark:text-gray-400">
                   Zip
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -252,26 +263,34 @@ export const ContactEdit = ({ userProfile }) => {
             <div className="flex col-span-2"></div>
             <div className="flex col-span-3">
               <div className="w-full">
-                <label htmlFor="reference" className="dark:text-gray-400">
-                  Referred By
-                </label>
-                <select
-                  id="reference"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder=""
-                  onChange={(event) => {
-                    const copy = { ...contact };
-                    copy.referralContactId = event.target.value;
-                    setContact(copy);
-                  }}
-                ></select>
+                <Label htmlFor="contact">Referred By:</Label>
+                <Button
+                  id="contact"
+                  color="light"
+                  className="w-full"
+                  value={chosenContact.refferalContactId}
+                  onClick={setModalOpen}
+                >
+                  Select Contact
+                </Button>
+                {modalOpen ? (
+                  <ContactModal
+                    modalState={modalOpen}
+                    setModalState={setModalOpen}
+                    contactState={chosenContact}
+                    contactSetterFunction={setChosenContact}
+                    userProfile={userProfile}
+                  />
+                ) : (
+                  ""
+                )}
               </div>
             </div>
             <div className="flex col-span-2">
               <div className="w-full">
-                <label htmlFor="CellPhone" className="dark:text-gray-400">
+                <Label htmlFor="CellPhone" className="dark:text-gray-400">
                   Cell Phone
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -286,9 +305,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-2">
               <div className="w-full">
-                <label htmlFor="CellPhoneNote" className="dark:text-gray-400">
+                <Label htmlFor="CellPhoneNote" className="dark:text-gray-400">
                   Notes
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -303,9 +322,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="col-span-1"></div>
             <div className="col-span-3 row-span-2">
-              <label htmlFor="SpecialNotes" className="dark:text-gray-400">
+              <Label htmlFor="SpecialNotes" className="dark:text-gray-400">
                 Special Notes
-              </label>
+              </Label>
               <Textarea
                 id="SpecialNotes"
                 rows="4"
@@ -320,9 +339,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-2">
               <div className="w-full">
-                <label htmlFor="HomePhone" className="dark:text-gray-400">
+                <Label htmlFor="HomePhone" className="dark:text-gray-400">
                   Home Phone
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -337,9 +356,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-2">
               <div className="w-full">
-                <label htmlFor="HomePhoneNote" className="dark:text-gray-400">
+                <Label htmlFor="HomePhoneNote" className="dark:text-gray-400">
                   Notes
-                </label>
+                </Label>
                 <TextInput
                   sizing="md"
                   type="text"
@@ -354,9 +373,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-4">
               <div className="w-full">
-                <label htmlFor="HomePhoneNote" className="dark:text-gray-400">
+                <Label htmlFor="HomePhoneNote" className="dark:text-gray-400">
                   Source
-                </label>
+                </Label>
                 <Select
                   value={contact.sourceId}
                   onChange={(event) => {
@@ -378,9 +397,9 @@ export const ContactEdit = ({ userProfile }) => {
             </div>
             <div className="flex col-span-4">
               <div className="w-full">
-                <label htmlFor="HomePhoneNote" className="dark:text-gray-400">
+                <Label htmlFor="HomePhoneNote" className="dark:text-gray-400">
                   Status
-                </label>
+                </Label>
                 <Select
                   value={contact.statusId}
                   onChange={(event) => {
