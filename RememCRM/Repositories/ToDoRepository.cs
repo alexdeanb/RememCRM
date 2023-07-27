@@ -18,16 +18,18 @@ namespace RememCRM.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT
-                                        td.Id, td.UserId, td.Description, td.ContactId, td.PriotityId, td.due, td.Completed,
+                                        td.Id, td.UserId, td.Description, td.ContactId, td.PriorityId, td.due, td.Completed,
                                         c.AssignedUserId, c.PrimaryFirstName, c.PrimaryLastName, c.PrimaryEmailAddress, c.PrimaryDOB, c.SecondaryFirstName, c.SecondaryLastName, c.SecondaryEmailAddress, c.SecondaryDOB,
                                         c.Address, c.City, c.State, c.Zip, c.HomePhone, c.HomePhoneNote, c.CellPhone, c.CellPhoneNote, c.Notes, c.ReferralContactId, c.SourceId, c.StatusId,
                                         p.Name as 'PriorityName', 
                                         up.Name as 'UserName', up.Email as 'UserEmail',up.OrganizationId, up.UserTypeId, up.FirebaseUserId
                                         FROM ToDoItems td
                                         JOIN Contacts c ON td.ContactId = c.Id
-                                        JOIN [Priority] p ON td.PriotityId = p.Id
+                                        JOIN [Priority] p ON td.PriorityId = p.Id
                                         JOIN UserProfile up ON up.Id = td.UserId
-                                        WHERE td.UserId = @id";
+                                        WHERE td.UserId = @id AND td.completed = 0
+                                        ORDER BY td.due";
+                   
                     DbUtils.AddParameter(cmd, "@id", id);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -100,14 +102,14 @@ namespace RememCRM.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT
-                                        td.Id, td.UserId, td.Description, td.ContactId, td.PriotityId, td.due, td.Completed,
+                                        td.Id, td.UserId, td.Description, td.ContactId, td.PriorityId, td.due, td.Completed,
                                         c.AssignedUserId, c.PrimaryFirstName, c.PrimaryLastName, c.PrimaryEmailAddress, c.PrimaryDOB, c.SecondaryFirstName, c.SecondaryLastName, c.SecondaryEmailAddress, c.SecondaryDOB,
                                         c.Address, c.City, c.State, c.Zip, c.HomePhone, c.HomePhoneNote, c.CellPhone, c.CellPhoneNote, c.Notes, c.ReferralContactId, c.SourceId, c.StatusId,
                                         p.Name as 'PriorityName', 
                                         up.Name as 'UserName', up.Email as 'UserEmail',up.OrganizationId, up.UserTypeId, up.FirebaseUserId
                                         FROM ToDoItems td
                                         JOIN Contacts c ON td.ContactId = c.Id
-                                        JOIN [Priority] p ON td.PriotityId = p.Id
+                                        JOIN [Priority] p ON td.PriorityId = p.Id
                                         JOIN UserProfile up ON up.Id = td.UserId
                                         WHERE td.Id = @id";
                     DbUtils.AddParameter(cmd, "@id", id);

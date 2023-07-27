@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RememCRM.Models;
 using RememCRM.Repositories;
@@ -33,7 +34,7 @@ namespace RememCRM.Controllers
         public IActionResult AddToDo(ToDoItem ToDo)
         {
             _toDoRepository.AddToDo(ToDo);
-            return CreatedAtAction("Get", new { id = ToDo.Id }, ToDo);
+            return CreatedAtAction("GetItemById", new { id = ToDo.Id }, ToDo);
         }
 
         [HttpPut]
@@ -44,7 +45,14 @@ namespace RememCRM.Controllers
                 return BadRequest();
             }
             _toDoRepository.UpdateToDo(ToDo);
-            return CreatedAtAction("Get", new { id = ToDo.Id }, ToDo);
+            return CreatedAtAction("GetItemById", new { id = ToDo.Id }, ToDo);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _toDoRepository.DeleteToDo(id);
+            return Ok();
         }
     }
 }

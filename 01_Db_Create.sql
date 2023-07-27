@@ -124,7 +124,7 @@ CREATE TABLE [ToDoItems] (
   [UserId] int NOT NULL,
   [Description] text NOT NULL,
   [ContactId] int,
-  [PriotityId] int,
+  [PriorityId] int,
   [Due] Date,
   [Completed] bit
 )
