@@ -7,6 +7,7 @@ import { ToDoForm } from "../todolist/ToDoForm";
 import { ContactEdit } from "../contacts/ContactEdit";
 import { ContactDetails } from "../contacts/ContactDetails";
 import { ToDoEdit } from "../todolist/ToDoEdit";
+import { ContractAdd } from "../contracts/ContractAdd";
 
 export const UserViews = ({ userProfile, userToDos, setUserToDos }) => {
   return (
@@ -55,6 +56,10 @@ export const UserViews = ({ userProfile, userToDos, setUserToDos }) => {
         <Route
           path="addContact"
           element={<ContactAdd userProfile={userProfile} />}
+        />
+        <Route
+          path="addContract"
+          element={<ContractAdd userProfile={userProfile} />}
         />
       </Route>
       <Route path="/MyContacts">

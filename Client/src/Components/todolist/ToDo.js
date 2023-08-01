@@ -10,17 +10,6 @@ import { Link } from "react-router-dom";
 
 export const ToDo = ({ todo, setUserToDos }) => {
   let dueDate = todo.due.split("T")[0];
-  // const [toDoData, setToDoData] = useState({});
-
-  // useEffect(() => {
-  //   setToDoData(todo);
-  // }, [todo]);
-
-  // useEffect(() => {
-  //   if (todo.completed === true) {
-  //     editToDo(todo).then(() => {});
-  //   }
-  // }, [todo]);
 
   const handleUpdateClick = () => {
     todo.completed = true;
