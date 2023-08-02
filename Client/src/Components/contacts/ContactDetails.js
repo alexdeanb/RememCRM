@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getContactById } from "../../modules/contactManager";
 import { getContractsByContactId } from "../../modules/contractManager";
+import { getCompletedToDoByContactId } from "../../modules/ToDoManager";
+import { Table } from "flowbite-react";
 
 export const ContactDetails = () => {
   const { id } = useParams();
   const [contact, setContact] = useState();
   const [contract, setContract] = useState();
+  const [completedTasks, setCompletedTasks] = useState([]);
   let conCloseDate = null;
   let primDob = null;
   let seconDob = null;
@@ -33,6 +36,7 @@ export const ContactDetails = () => {
   useEffect(() => {
     if (contact) {
       getContractsByContactId(contact.id).then(setContract);
+      getCompletedToDoByContactId(contact.id).then(setCompletedTasks);
     }
   }, [contact]);
 
@@ -142,8 +146,47 @@ export const ContactDetails = () => {
                 </div>
               </div>
             ) : (
-              ""
+              <div className="MiddleBox dark:text-white col-span-1">
+                <div className="grid grid-cols-1">
+                  <h1 className="col-span-1 text-5xl text-center py-2">
+                    Contract Not Added
+                  </h1>
+                </div>
+              </div>
             )}
+            <div className="RightBox dark:text-white col-span-1">
+              {completedTasks.length > 0 ? (
+                <>
+                  <h1 className="col-span-1 text-5xl text-center py-2 pb-4">
+                    Completed Actions
+                  </h1>
+                  <Table>
+                    <Table.Head>
+                      <Table.HeadCell>Due Date</Table.HeadCell>
+                      <Table.HeadCell>Description</Table.HeadCell>
+                    </Table.Head>
+                    <Table.Body>
+                      {completedTasks.map((task) => {
+                        let taskDue = new Date(Date.parse(task.due));
+                        taskDue = taskDue.toLocaleDateString("en-US");
+                        return (
+                          <>
+                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                              <Table.Cell>{taskDue}</Table.Cell>
+                              <Table.Cell>{task.description}</Table.Cell>
+                            </Table.Row>
+                          </>
+                        );
+                      })}
+                    </Table.Body>
+                  </Table>
+                </>
+              ) : (
+                <h1 className="col-span-1 text-5xl text-center py-2">
+                  No Actions Taken
+                </h1>
+              )}
+            </div>
           </div>
         </div>
       </div>

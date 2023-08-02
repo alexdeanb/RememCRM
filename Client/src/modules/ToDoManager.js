@@ -40,6 +40,25 @@ export const getAllToDoById = (id) => {
   });
 };
 
+export const getCompletedToDoByContactId = (id) => {
+  return getToken().then((token) => {
+    return fetch(`${baseUrl}/Contact/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((resp) => {
+      if (resp.ok) {
+        return resp.json();
+      } else {
+        throw new Error(
+          "An unknown error occurred while trying to get Completed ToDos for the Contact."
+        );
+      }
+    });
+  });
+};
+
 export const addToDo = (toDo) => {
   return getToken().then((token) => {
     return fetch(baseUrl, {

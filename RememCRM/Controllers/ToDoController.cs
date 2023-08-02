@@ -30,6 +30,13 @@ namespace RememCRM.Controllers
 
         }
 
+        [HttpGet("Contact/{id}")]
+        public IActionResult GetCompletedByContactId(int id)
+        {
+            return Ok(_toDoRepository.GetAllCompletedByContactId(id));
+
+        }
+
         [HttpPost]
         public IActionResult AddToDo(ToDoItem ToDo)
         {

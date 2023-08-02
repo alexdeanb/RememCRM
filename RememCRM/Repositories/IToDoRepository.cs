@@ -8,6 +8,7 @@ namespace RememCRM.Repositories
         void AddToDo(ToDoItem ToDo);
         void DeleteToDo(int id);
         List<ToDoItem> GetAllByUserId(int id);
+        List<ToDoItem> GetAllCompletedByContactId(int id);
         ToDoItem GetItemById(int id);
         void UpdateToDo(ToDoItem ToDo);
     }
