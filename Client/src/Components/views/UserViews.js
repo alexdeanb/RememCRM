@@ -8,6 +8,7 @@ import { ContactEdit } from "../contacts/ContactEdit";
 import { ContactDetails } from "../contacts/ContactDetails";
 import { ToDoEdit } from "../todolist/ToDoEdit";
 import { ContractAdd } from "../contracts/ContractAdd";
+import { ContractEdit } from "../contracts/ContractEdit";
 
 export const UserViews = ({ userProfile, userToDos, setUserToDos }) => {
   return (
@@ -57,10 +58,13 @@ export const UserViews = ({ userProfile, userToDos, setUserToDos }) => {
           path="addContact"
           element={<ContactAdd userProfile={userProfile} />}
         />
-        <Route
-          path="addContract"
-          element={<ContractAdd userProfile={userProfile} />}
-        />
+        <Route path="/Contract">
+          <Route index element={<ContractAdd userProfile={userProfile} />} />
+          <Route
+            path="Edit/:id"
+            element={<ContractEdit userProfile={userProfile} />}
+          />
+        </Route>
       </Route>
       <Route path="/MyContacts">
         <Route index element={<ContactList userProfile={userProfile} />} />

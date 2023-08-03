@@ -9,13 +9,13 @@ namespace RememCRM.Models
         public string MaritalStatus { get; set; }
         public string ReligiousAffiliation { get; set; }
         public string BurialLocation { get; set; }
-        public string Name { get; set; }
+        public string DeceasedName { get; set; }
         public DateTime DOD { get; set; }
         public int RelationId { get; set; }
         public ListOption Relation { get; set; }
-        public int ServiceTypeId { get; set; }
+        public int? ServiceTypeId { get; set; }
         public ListOption ServiceType { get; set; }
-        public int BurialTypeId { get; set; }
+        public int? BurialTypeId { get; set; }
         public ListOption BurialType { get; set; }
 
     }

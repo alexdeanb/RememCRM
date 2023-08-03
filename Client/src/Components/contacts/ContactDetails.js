@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getContactById } from "../../modules/contactManager";
 import { getContractsByContactId } from "../../modules/contractManager";
 import { getCompletedToDoByContactId } from "../../modules/ToDoManager";
-import { Table } from "flowbite-react";
+import { Table, Tooltip } from "flowbite-react";
 
 export const ContactDetails = () => {
   const { id } = useParams();
@@ -128,9 +128,18 @@ export const ContactDetails = () => {
             {contract ? (
               <div className="MiddleBox dark:text-white col-span-1">
                 <div className="grid grid-cols-1">
-                  <h1 className="col-span-1 text-5xl text-center py-2">
-                    Contract Details
-                  </h1>
+                  <div className="col-span-1 flex justify-center">
+                    <Tooltip
+                      content="Click to Edit Contract"
+                      placement="bottom"
+                    >
+                      <Link to={`/Contract/edit/${contract.id}`}>
+                        <h1 className=" text-5xl text-center py-2">
+                          Contract Details
+                        </h1>
+                      </Link>
+                    </Tooltip>
+                  </div>
                   <p className="col-span-1 text-xl text-center py-2">
                     Contract Type - {contract.contractType.name}
                   </p>
