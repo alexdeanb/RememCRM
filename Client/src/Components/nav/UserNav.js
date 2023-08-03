@@ -63,10 +63,10 @@ export const UserNav = ({ userProfile, userToDos }) => {
                         {userProfile.email}
                       </span>
                     </Dropdown.Header>
-                    <Dropdown.Item>Dashboard</Dropdown.Item>
+                    {/* <Dropdown.Item>Dashboard</Dropdown.Item>
                     <Dropdown.Item>Settings</Dropdown.Item>
                     <Dropdown.Item>Earnings</Dropdown.Item>
-                    <Dropdown.Divider />
+                    <Dropdown.Divider /> */}
                     <Dropdown.Item onClick={logout}>Sign out</Dropdown.Item>
                   </Dropdown>
                 </div>
@@ -120,7 +120,7 @@ export const UserNav = ({ userProfile, userToDos }) => {
               </li>
               <li>
                 <Link
-                  to="/addContract"
+                  to="/Contract"
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 >
                   <svg

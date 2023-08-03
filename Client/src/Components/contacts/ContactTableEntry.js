@@ -1,4 +1,4 @@
-import { Table } from "flowbite-react";
+import { Table, Tooltip } from "flowbite-react";
 import { Link } from "react-router-dom";
 
 export const ContactTableEntry = (contact) => {
@@ -6,7 +6,9 @@ export const ContactTableEntry = (contact) => {
     <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
       <Link to={`/MyContacts/details/${contact.id}`}>
         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-          {contact.primaryFirstName} {contact.primaryLastName}
+          <Tooltip content="View Details">
+            {contact.primaryFirstName} {contact.primaryLastName}
+          </Tooltip>
         </Table.Cell>
       </Link>
       <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
