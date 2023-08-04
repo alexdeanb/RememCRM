@@ -6,7 +6,7 @@ using RememCRM.Utils;
 
 namespace RememCRM.Repositories
 {
-    public class DeceasedRepository : BaseRepository
+    public class DeceasedRepository : BaseRepository, IDeceasedRepository
     {
         public DeceasedRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -30,7 +30,7 @@ namespace RememCRM.Repositories
                                         ON d.ServiceTypeId = st.Id
                                         JOIN BurialTypes bt
                                         ON d.BurialTypeId = bt.Id";
-                    using(SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         var Deceased = new List<Deceased>();
                         while (reader.Read())
@@ -52,9 +52,9 @@ namespace RememCRM.Repositories
                                 },
                                 ServiceTypeId = DbUtils.GetNullableInt(reader, "ServiceTypeId"),
                                 BurialTypeId = DbUtils.GetNullableInt(reader, "BurialTypeId")
-                                
+
                             };
-                           
+
                             if (DbUtils.GetNullableInt(reader, "ServiceTypeId") != null)
                             {
                                 Decedent.ServiceType = new ListOption()
@@ -81,5 +81,8 @@ namespace RememCRM.Repositories
                 }
             }
         }
+
+
+
     }
 }

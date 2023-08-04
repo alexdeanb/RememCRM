@@ -77,6 +77,7 @@ namespace RememCRM
             services.AddTransient<IContactRepository, ContactRepository>();
             services.AddTransient<IToDoRepository, ToDoRepository>();
             services.AddTransient<IContractRepository, ContractRepository>();
+            services.AddTransient<IDeceasedRepository, DeceasedRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
