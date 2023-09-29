@@ -1,10 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ApplicationViews } from "./Components/views/ApplicationViews";
 import { onLoginStatusChange, me } from "./modules/authManager";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import { getAllUserToDos } from "./modules/ToDoManager";
 
+export let userContext = null;
+
 function App() {
+  userContext = createContext();
+
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
   const [userToDos, setUserToDos] = useState();
@@ -57,12 +61,20 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ApplicationViews
-        isLoggedIn={isLoggedIn}
-        userProfile={userProfile}
-        userToDos={userToDos}
-        setUserToDos={setUserToDosByUser}
-      />
+      <userContext.Provider
+        value={{
+          isLoggedIn: [isLoggedIn, setIsLoggedIn],
+          userProfile: [userProfile, setUserProfile],
+          userToDos: [userToDos, setUserToDos],
+        }}
+      >
+        <ApplicationViews
+          isLoggedIn={isLoggedIn}
+          userProfile={userProfile}
+          userToDos={userToDos}
+          setUserToDos={setUserToDosByUser}
+        />
+      </userContext.Provider>
     </BrowserRouter>
   );
 }

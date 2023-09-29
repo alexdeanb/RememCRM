@@ -1,10 +1,9 @@
 import { Button, Label, Select, TextInput, Textarea } from "flowbite-react";
 import { useEffect, useState } from "react";
 import "flowbite";
-import Datepicker from "tailwind-datepicker-react";
 import { getAllPriorities } from "../../modules/ListOptionManager";
 import { getAllUserContacts } from "../../modules/contactManager";
-import { addToDo, editToDo, getAllUserToDos } from "../../modules/ToDoManager";
+import { editToDo } from "../../modules/ToDoManager";
 import { useNavigate, useParams } from "react-router-dom";
 import { ContactModal } from "../spareparts/ContactModal";
 import { getAllToDoById } from "../../modules/ToDoManager";

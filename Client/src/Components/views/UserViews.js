@@ -23,16 +23,7 @@ export const UserViews = ({ userProfile, userToDos, setUserToDos }) => {
       >
         <Route path="" element={<Home />} />
         <Route path="/ToDos">
-          <Route
-            index
-            element={
-              <ToDoList
-                userProfile={userProfile}
-                userToDos={userToDos}
-                setUserToDos={setUserToDos}
-              />
-            }
-          />
+          <Route index element={<ToDoList />} />
           <Route
             path="Add"
             element={

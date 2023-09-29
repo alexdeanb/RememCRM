@@ -1,13 +1,18 @@
 import { Button, Label, Select, TextInput, Textarea } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "flowbite";
 import { getAllPriorities } from "../../modules/ListOptionManager";
 import { getAllUserContacts } from "../../modules/contactManager";
 import { addToDo } from "../../modules/ToDoManager";
 import { useNavigate } from "react-router-dom";
 import { ContactModal } from "../spareparts/ContactModal";
+import { userContext } from "../../App";
 
-export const ToDoForm = ({ userProfile, userToDos, setUserToDos }) => {
+export const ToDoForm = () => {
+  const { userProfile, userToDos } = useContext(userContext);
+  const [userProfileValue, setUserProfileValue] = userProfileValue;
+  const [userToDosValue, setUserToDosValue] = userToDos;
+
   const defaultDate = new Date();
   const [ToDo, setToDo] = useState({
     UserId: 0,
@@ -26,8 +31,8 @@ export const ToDoForm = ({ userProfile, userToDos, setUserToDos }) => {
 
   useEffect(() => {
     getAllPriorities().then(setPriorities);
-    getAllUserContacts(userProfile.id).then(setContacts);
-    setUserId(userProfile.id);
+    getAllUserContacts(userProfileValue.id).then(setContacts);
+    setUserId(userProfileValue.id);
   }, []);
 
   useEffect(() => {
@@ -46,7 +51,7 @@ export const ToDoForm = ({ userProfile, userToDos, setUserToDos }) => {
 
   const handleToDoSubmit = () => {
     addToDo(ToDo).then(() => {
-      setUserToDos();
+      setUserToDosValue();
       navigate("/ToDos");
     });
   };
@@ -88,7 +93,6 @@ export const ToDoForm = ({ userProfile, userToDos, setUserToDos }) => {
                   setModalState={setModalOpen}
                   contactState={chosenContact}
                   contactSetterFunction={setChosenContact}
-                  userProfile={userProfile}
                 />
               ) : (
                 ""
