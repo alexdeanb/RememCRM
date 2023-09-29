@@ -27,7 +27,7 @@ export const ContactList = () => {
         </Table.Head>
         <Table.Body className="divide-y">
           {myContacts.map((contact) => {
-            return ContactTableEntry(contact);
+            return ContactTableEntry(contact, contact.id);
           })}
         </Table.Body>
       </Table>

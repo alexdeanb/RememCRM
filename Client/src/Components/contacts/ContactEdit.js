@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Label } from "flowbite-react";
 import { ContactModal } from "../spareparts/ContactModal";
 import MainLayout from "../layouts/MainLayout";
+import ContactFormField from "../layouts/ContactFormField";
 
 export const ContactEdit = ({ userProfile }) => {
   const [contact, setContact] = useState({ id: 0 });
@@ -45,220 +46,148 @@ export const ContactEdit = ({ userProfile }) => {
               </p>
             </div>
           </div>
-          <div className="flex col-span-2">
-            <div className="w-full">
-              <Label htmlFor="first_name" className="dark:text-gray-400">
-                First name
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                required
-                value={contact.primaryFirstName}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.primaryFirstName = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex col-span-2">
-            <div className="w-full">
-              <Label htmlFor="last_name" className="dark:text-gray-400">
-                Last name
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.primaryLastName}
-                required
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.primaryLastName = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex col-span-2">
-            <div className="w-full">
-              <Label htmlFor="email_address" className="dark:text-gray-400">
-                Email Address
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.primaryEmailAddress}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.primaryEmailAddress = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex col-span-1">
-            <div className="w-full">
-              <Label htmlFor="last_name" className="dark:text-gray-400">
-                DOB
-              </Label>
-              <TextInput
-                sizing="md"
-                type="date"
-                value={contact.primaryDOB}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.primaryDOB = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
+          <ContactFormField
+            colSpan={2}
+            labelText={"First Name"}
+            type="text"
+            value={contact.primaryFirstName}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.primaryFirstName = event.target.value;
+              setContact(copy);
+            }}
+          />
+          <ContactFormField
+            colSpan={2}
+            labelText={"Last Name"}
+            type={"text"}
+            value={contact.primaryLastName}
+            required
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.primaryLastName = event.target.value;
+              setContact(copy);
+            }}
+          />
+          <ContactFormField
+            colSpan={2}
+            labelText={"Email Address"}
+            type="text"
+            value={contact.primaryEmailAddress}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.primaryEmailAddress = event.target.value;
+              setContact(copy);
+            }}
+          />
+          <ContactFormField
+            colSpan={1}
+            labelText={"DOB"}
+            type="date"
+            value={contact.primaryDOB}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.primaryDOB = event.target.value;
+              setContact(copy);
+            }}
+          />
           <div className="flex col-span-1">
             <div className="flex items-end justify-end h-auto w-full">
               <p className="text-xl text-gray-400 dark:text-gray-500">OTHER</p>
             </div>
           </div>
-          <div className="flex col-span-2">
-            <div className="w-full">
-              <Label htmlFor="first_name" className="dark:text-gray-400">
-                First name
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.secondaryFirstName}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.secondaryFirstName = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex col-span-2">
-            <div className="w-full">
-              <Label htmlFor="last_name" className="dark:text-gray-400">
-                Last name
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.secondaryLastName}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.secondaryLastName = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex col-span-2">
-            <div className="w-full">
-              <Label htmlFor="email_address" className="dark:text-gray-400">
-                Email Address
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.secondaryEmailAddress}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.secondaryEmailAddress = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex col-span-1">
-            <div className="w-full">
-              <Label htmlFor="last_name" className="dark:text-gray-400">
-                DOB
-              </Label>
-              <TextInput
-                sizing="md"
-                type="date"
-                value={contact.secondaryDOB}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.secondaryDOB = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
+          <ContactFormField
+            colSpan={2}
+            labelText={"First Name"}
+            type="text"
+            value={contact.secondaryFirstName}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.secondaryFirstName = event.target.value;
+              setContact(copy);
+            }}
+          />
+          <ContactFormField
+            colSpan={2}
+            labelText={"Last Name"}
+            type="text"
+            value={contact.secondaryLastName}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.secondaryLastName = event.target.value;
+              setContact(copy);
+            }}
+          />
+          <ContactFormField
+            colSpan={2}
+            labelText={"Email Address"}
+            type="text"
+            value={contact.secondaryEmailAddress}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.secondaryEmailAddress = event.target.value;
+              setContact(copy);
+            }}
+          />
+          <ContactFormField
+            colSpan={1}
+            labelText={"DOB"}
+            type="date"
+            value={contact.secondaryDOB}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.secondaryDOB = event.target.value;
+              setContact(copy);
+            }}
+          />
           <hr className="col-span-8" />
-          <div className="flex col-span-3">
-            <div className="w-full">
-              <Label htmlFor="first_name" className="dark:text-gray-400">
-                Address
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.address}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.address = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
+          <ContactFormField
+            colSpan={3}
+            labelText={"Address"}
+            value={contact.address}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.address = event.target.value;
+              setContact(copy);
+            }}
+          />
+
           <div className="flex col-span-5"></div>
-          <div className="flex col-span-1">
-            <div className="w-full">
-              <Label htmlFor="city" className="dark:text-gray-400">
-                City
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.city}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.city = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex col-span-1">
-            <div className="w-full">
-              <Label htmlFor="state" className="dark:text-gray-400">
-                State
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.state}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.state = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex col-span-1">
-            <div className="w-full">
-              <Label htmlFor="zip" className="dark:text-gray-400">
-                Zip
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.zip}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.zip = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
+          <ContactFormField
+            colSpan={1}
+            labelText={"City"}
+            type="text"
+            value={contact.city}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.city = event.target.value;
+              setContact(copy);
+            }}
+          />
+          <ContactFormField
+            colSpan={1}
+            labelText={"State"}
+            type="text"
+            value={contact.state}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.state = event.target.value;
+              setContact(copy);
+            }}
+          />
+          <ContactFormField
+            colSpan={1}
+            labelText={"Zip"}
+            type="text"
+            value={contact.zip}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.zip = event.target.value;
+              setContact(copy);
+            }}
+          />
           <div className="flex col-span-2"></div>
+
           <div className="flex col-span-3">
             <div className="w-full">
               <Label htmlFor="contact">Referred By:</Label>
@@ -284,40 +213,30 @@ export const ContactEdit = ({ userProfile }) => {
               )}
             </div>
           </div>
-          <div className="flex col-span-2">
-            <div className="w-full">
-              <Label htmlFor="CellPhone" className="dark:text-gray-400">
-                Cell Phone
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.cellPhone}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.cellPhone = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex col-span-2">
-            <div className="w-full">
-              <Label htmlFor="CellPhoneNote" className="dark:text-gray-400">
-                Notes
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.cellPhoneNote}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.cellPhoneNote = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
+
+          <ContactFormField
+            colSpan={2}
+            labelText={"Cell Phone"}
+            type="text"
+            value={contact.cellPhone}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.cellPhone = event.target.value;
+              setContact(copy);
+            }}
+          />
+          <ContactFormField
+            colSpan={2}
+            labelText={"Notes"}
+            type="text"
+            value={contact.cellPhoneNote}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.cellPhoneNote = event.target.value;
+              setContact(copy);
+            }}
+          />
+
           <div className="col-span-1"></div>
           <div className="col-span-3 row-span-2">
             <Label htmlFor="SpecialNotes" className="dark:text-gray-400">
@@ -335,40 +254,29 @@ export const ContactEdit = ({ userProfile }) => {
               }}
             />
           </div>
-          <div className="flex col-span-2">
-            <div className="w-full">
-              <Label htmlFor="HomePhone" className="dark:text-gray-400">
-                Home Phone
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.homePhone}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.homePhone = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
-          <div className="flex col-span-2">
-            <div className="w-full">
-              <Label htmlFor="HomePhoneNote" className="dark:text-gray-400">
-                Notes
-              </Label>
-              <TextInput
-                sizing="md"
-                type="text"
-                value={contact.homePhoneNote}
-                onChange={(event) => {
-                  const copy = { ...contact };
-                  copy.homePhoneNote = event.target.value;
-                  setContact(copy);
-                }}
-              />
-            </div>
-          </div>
+          <ContactFormField
+            colSpan={2}
+            labelText={"Home Phone"}
+            type="text"
+            value={contact.homePhone}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.homePhone = event.target.value;
+              setContact(copy);
+            }}
+          />
+          <ContactFormField
+            colSpan={2}
+            labelText={"Notes"}
+            type="text"
+            value={contact.homePhoneNote}
+            onChange={(event) => {
+              const copy = { ...contact };
+              copy.homePhoneNote = event.target.value;
+              setContact(copy);
+            }}
+          />
+
           <div className="flex col-span-4">
             <div className="w-full">
               <Label htmlFor="HomePhoneNote" className="dark:text-gray-400">

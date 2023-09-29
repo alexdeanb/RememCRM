@@ -8,12 +8,18 @@ const ContactFormField = ({
   onChange,
   labelText,
   type,
+  ...otherProps
 }) => {
   return (
     <div className={`flex col-span-${colSpan} row-span-${rowSpan}`}>
       <div className="w-full">
         <Label className="dark:text-gray-400">{labelText}</Label>
-        <TextInput sizing="md" type={type} onChange={onChange} />
+        <TextInput
+          sizing="md"
+          type={type}
+          onChange={onChange}
+          {...otherProps}
+        />
       </div>
     </div>
   );

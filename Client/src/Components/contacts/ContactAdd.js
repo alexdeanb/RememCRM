@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext, useLayoutEffect } from "react";
 import { Button, Select, TextInput, Textarea } from "flowbite-react";
 import { getAllStatuses, getAllSources } from "../../modules/ListOptionManager";
 import { addContact } from "../../modules/contactManager";
@@ -7,13 +7,17 @@ import { Label } from "flowbite-react";
 import { ContactModal } from "../spareparts/ContactModal";
 import MainLayout from "../layouts/MainLayout";
 import ContactFormField from "../layouts/ContactFormField";
+import { userContext } from "../../App";
 
-export const ContactAdd = ({ userProfile }) => {
+export const ContactAdd = () => {
+  const { userProfile } = useContext(userContext);
+  const [userProfileValue, setUserProfileValue] = userProfile;
+
   const [modalOpen, setModalOpen] = useState(false);
   const [chosenContact, setChosenContact] = useState();
 
   const [newContact, setNewContact] = useState({
-    AssignedUserId: userProfile.id,
+    AssignedUserId: userProfileValue.id,
     PrimaryFirstName: "",
     PrimaryLastName: "",
     PrimaryEmailAddress: null,
@@ -38,8 +42,10 @@ export const ContactAdd = ({ userProfile }) => {
 
   const [sources, setSources] = useState([]);
   const [statuses, setStatuses] = useState([]);
+
   const navigate = useNavigate();
-  useEffect(() => {
+
+  useLayoutEffect(() => {
     getAllStatuses().then(setStatuses);
     getAllSources().then(setSources);
   }, []);
